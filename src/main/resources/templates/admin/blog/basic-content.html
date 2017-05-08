@@ -1,0 +1,51 @@
+<style>
+    .user_data li{
+        padding: 10px;
+    }
+    #blog-desc{
+        font-size: 15px;
+        border:0;
+        background-color: #fff;
+    }
+</style>
+<div class="row">
+    <div class="col-md-5">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>基础信息</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <ul class="list-unstyled user_data">
+                    <li class="row">
+                        <div class="col-md-3">名称：</div>
+                        <div class="col-md-9">${bloginfo.name}</div>
+                    </li>
+                    <li class="row">
+                        <a href="${bloginfo.url!}" target="_blank">
+                            <div class="col-md-3">地址:</div>
+                            <div class="col-md-9">${bloginfo.url!}</div>
+                        </a>
+                    </li>
+                    <li class="row">
+                        <div class="col-md-3">简介:</div>
+                        <div class="col-md-9">${bloginfo.desc!}</div>
+                    </li>
+                </ul>
+                <a class="btn btn-success" id="edit-profile"><i class="fa fa-edit m-right-xs"></i>修改</a>
+                <br/>
+                <!-- end of skills -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 基础信息编辑弹出框 -->
+<div class="th-window" title="基础信息编辑" id="bloginfo-profile-edit">
+    <div class="row">
+        <div class="col-md-3">博客名称</div>
+        <div class="col-md-9">
+            <input type="text" class="form-control" id="name" placeholder="博客名称">
+        </div>
+    </div>
+</div>

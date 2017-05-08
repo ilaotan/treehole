@@ -15,11 +15,9 @@ import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {ThymeleafAutoConfiguration.class})
-@ComponentScan("com.zhangyingwei.treehole")
 @Configuration
-@MapperScan(basePackages = {"com.zhangyingwei.treehole.install.dao"})
+@MapperScan(basePackages = {"com.zhangyingwei.treehole"})
 public class TreeholeApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(TreeholeApplication.class, args);
 	}

@@ -152,7 +152,8 @@ public class TreeHoleUtils {
         Menu root = new Menu("仪表盘").setRoot(true);
         root.addChild(
                 new Menu("博客管理", "index1","fa-home")
-                        .addChild(new Menu("基础信息管理","index/index1"))
+                        .addChild(new Menu("基础信息","/admin/blog/basic"))
+                        .addChild(new Menu("统计信息","index/index1"))
                         .addChild(new Menu("系统设置","index/index2"))
         );
         root.addChild(
@@ -160,12 +161,49 @@ public class TreeHoleUtils {
                         .addChild(new Menu("新建发布","index/index1"))
                         .addChild(new Menu("历史管理","index/index2"))
                         .addChild(new Menu("评论管理","index/index3"))
-                        .addChild(new Menu("分类与标签管理","index/index4"))
+                        .addChild(new Menu("分类与标签","index/index4"))
         );
         root.addChild(
                 new Menu("素材管理", "index3","fa-desktop")
                         .addChild(new Menu("素材管理","index/index1"))
         );
         return root;
+    }
+
+    /**
+     * 登出
+     * 销毁 session中的user信息与menu信息
+     * @param session
+     */
+    public static void logout(HttpSession session) {
+        session.removeAttribute(TreeHoleEnum.LOGIN_MENU_KEY.getValue());
+        session.removeAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue());
+    }
+
+    /**
+     * 模拟登陆
+     * 用户测试
+     * @param session
+     */
+    public static void login(HttpSession session) {
+        User user = new User();
+        user.setId(1);
+        user.setUsername("张英伟");
+        user.setPassword("123456");
+        Menu menu = TreeHoleUtils.getMenu();
+        session.setAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue(), user);
+        session.setAttribute(TreeHoleEnum.LOGIN_MENU_KEY.getValue(), menu);
+    }
+
+    /**
+     * 把 \n 之类的 转换成 <br/> 之类的
+     * @param desc
+     * @return
+     */
+    public static String trans2Html(String desc) {
+        if (StringUtils.isNotEmpty(desc)){
+            desc = desc.replaceAll("\\n", "<br/>");
+        }
+        return desc;
     }
 }

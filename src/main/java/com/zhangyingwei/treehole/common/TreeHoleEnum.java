@@ -11,7 +11,8 @@ public enum TreeHoleEnum {
     DB_SQLITE_CLASS("org.sqlite.JDBC"),
     SQL_CREATE_DB("db create"),
     SQL_CREATE_TABLE("table create"),
-    LOGIN_USER_KEY("login_user");
+    LOGIN_USER_KEY("login_user"),
+    LOGIN_MENU_KEY("menus");
 
     private String value;
 
