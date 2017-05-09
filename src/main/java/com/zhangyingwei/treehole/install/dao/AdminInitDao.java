@@ -2,6 +2,7 @@ package com.zhangyingwei.treehole.install.dao;
 
 import com.zhangyingwei.treehole.install.model.AdminConf;
 import com.zhangyingwei.treehole.install.model.BlogConf;
+import com.zhangyingwei.treehole.install.model.InstallConf;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,4 +17,6 @@ public interface AdminInitDao {
     void insertOne(@Param("admin")AdminConf adminConf);
     @Insert("insert into bloginfo (name,url,desc) values (#{blog.name},#{blog.url},#{blog.desc})")
     void insertBlogInfo(@Param("blog") BlogConf blogConf);
+    @Insert("insert into installinfo(idate,iosname,iosdesktop,ilocal,ibower,ioscpu,ijdkversion) values (#{install.idate},#{install.iosname},#{install.iosdesktop},#{install.ilocal},#{install.ibower},#{install.ioscpu},#{install.ijdkversion})")
+    void insertInstallInfo(@Param("install") InstallConf installConf);
 }

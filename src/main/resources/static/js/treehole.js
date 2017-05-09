@@ -6,6 +6,7 @@ window.newWindow = function(dom,option,ok,esc){
     return layer.open({
         title:$(dom).attr("title"),
         type: 1,
+        maxmin: true,
         area: [option.width, option.height], //宽高
         btn: ["确定","返回"],
         yes:function () {
@@ -16,6 +17,6 @@ window.newWindow = function(dom,option,ok,esc){
                 layer.closeAll();
             }
         },
-        content: $(dom).html()
+        content: $(dom).prop("outerHTML")
     });
 }

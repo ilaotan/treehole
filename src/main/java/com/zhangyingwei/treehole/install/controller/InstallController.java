@@ -7,6 +7,7 @@ import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
 import com.zhangyingwei.treehole.install.model.AdminConf;
 import com.zhangyingwei.treehole.install.model.BlogConf;
 import com.zhangyingwei.treehole.install.model.DbConf;
+import com.zhangyingwei.treehole.install.model.InstallConf;
 import com.zhangyingwei.treehole.install.service.AdminInitService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Map;
@@ -77,8 +79,19 @@ public class InstallController {
 
     @PostMapping("/blog/init")
     @ResponseBody
-    public Map initBlog(@Valid BlogConf blogConf) throws TreeHoleException {
+    public Map initBlog(@Valid BlogConf blogConf, HttpServletRequest request) throws TreeHoleException {
         this.adminInitService.blogInfoInit(blogConf);
+        //获取安装信息
+        Map<String, String> sysInfo = TreeHoleUtils.systemInfo();
+        String ipLocal = TreeHoleUtils.ipLocal(request.getRemoteAddr());
+        InstallConf installConf = new InstallConf();
+        installConf.setIdate(TreeHoleUtils.getCurrentDateTime());
+        installConf.setIbower(TreeHoleUtils.getBorwe(request));
+        installConf.setIjdkversion(sysInfo.get("ijdkversion"));
+        installConf.setIoscup(sysInfo.get("ioscpu"));
+        installConf.setIosdesktop(sysInfo.get("iosdesktop"));
+        installConf.setIosname(sysInfo.get("iosname"));
+        this.adminInitService.installInfoInit(installConf);
         return Ajax.success("初始化博客信息成功");
     }
 

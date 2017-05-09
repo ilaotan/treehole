@@ -6,13 +6,15 @@ import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.install.model.DbConf;
 import org.apache.commons.lang3.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by zhangyw on 2017/4/21.
@@ -205,5 +207,92 @@ public class TreeHoleUtils {
             desc = desc.replaceAll("\\n", "<br/>");
         }
         return desc;
+    }
+
+    /**
+     * 获取系统参数
+     * @return
+     */
+    public static Map<String,String> systemInfo(){
+        Map<String, String> map = new HashMap<String,String>();
+        map.putAll(osInfo());
+        return map;
+    }
+
+    private static Map<String,String> osInfo(){
+        Properties prop = System.getProperties();
+        Map<String, String> map = new HashMap<String,String>();
+        map.put("iosname", prop.getProperty("os.name"));
+        map.put("iosdesktop", prop.getProperty("sun.desktop"));
+        map.put("ioscup", prop.getProperty("sun.cpu.isalist"));
+        map.put("ijdkversion", prop.getProperty("java.version"));
+        return map;
+    }
+
+    /**
+     * 获取ip地址对应的物理地址
+     * @param ip
+     * @return
+     */
+    public static String ipLocal(String ip){
+        if(!isIpv4(ip)){
+            return "我好想不认识你的IPv6";
+        }
+        IPUtils.load("src/main/resources/17monipdb.dat");
+        String[] res = IPUtils.find(ip);
+        String result = "";
+        for (String re : res) {
+            if(StringUtils.isNotEmpty(re)){
+                result += re;
+                result += ",";
+            }
+        }
+        return result.substring(0, result.length() - 1);
+    }
+
+    /**
+     * 判断ip是不是ipv4
+     * 因为ipip库貌似不识别ipv6
+     * @param ip
+     * @return
+     */
+    private static boolean isIpv4(String ip) {
+        return ip.contains(".");
+    }
+
+    /**
+     * 获取当前日期
+     * @return
+     */
+    public static String getCurrentDate(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(new Date());
+    }
+
+    /**
+     * 获取当前日期+时间
+     * @return
+     */
+    public static String getCurrentDateTime(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.format(new Date());
+    }
+
+    /**
+     * 获取当前时间
+     * @return
+     */
+    public static String getCurrentTime(){
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        return format.format(new Date());
+    }
+
+    /**
+     * 获取浏览器类型
+     * @param request
+     * @return
+     */
+    public static String getBorwe(HttpServletRequest request) {
+        return request.getHeader("User-Agent");
     }
 }

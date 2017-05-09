@@ -5,6 +5,7 @@ import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
 import com.zhangyingwei.treehole.install.dao.AdminInitDao;
 import com.zhangyingwei.treehole.install.model.AdminConf;
 import com.zhangyingwei.treehole.install.model.BlogConf;
+import com.zhangyingwei.treehole.install.model.InstallConf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,10 @@ public class AdminInitService implements IAdminInitService {
             logger.error(msg);
             throw new TreeHoleException(msg, e);
         }
+    }
+
+    @Override
+    public void installInfoInit(InstallConf installConf) throws TreeHoleException {
+        adminInitDao.insertInstallInfo(installConf);
     }
 }
