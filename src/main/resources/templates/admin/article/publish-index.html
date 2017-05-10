@@ -5,7 +5,9 @@
 <head>
     <% include("/templates/lib/head-meta.html",{title:'新建文章'}){} %>
     <% include("/templates/lib/head-style.html"){} %>
-    <link href="/dist/simplemde/simplemde.min.css" rel="stylesheet">
+    <link href="/dist/iCheck/skins/flat/green.css" rel="stylesheet"/>
+    <link href="/dist/simplemde/simplemde.min.css" rel="stylesheet" />
+    <link href="/dist/switchery/dist/switchery.css" rel="stylesheet" />
 </head>
 
 <body class="nav-md footer_fixed">
@@ -19,6 +21,9 @@
 </div>
 <% include("/templates/lib/foot-script.html"){} %>
 <script src="/dist/simplemde/simplemde.min.js"></script>
+<script src="/dist/jquery/tagsinput/jquery.tagsinput.js"></script>
+<script src="/dist/iCheck/icheck.js"></script>
+<script src="/dist/switchery/dist/switchery.js"></script>
 <script src="/js/admin/article/publish.js"></script>
 </body>
 </html>

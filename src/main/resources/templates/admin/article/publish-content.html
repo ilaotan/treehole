@@ -1,12 +1,20 @@
 <style>
     .th-markdown #a-top{
         padding-bottom: 20px;
-        padding-top: 100px;
+        padding-top: 10px;
     }
     .th-markdown #a-top input{
         margin-bottom: 20px;
     }
+    #a-tags_tagsinput{
+        min-height: 20px !important;
+        height: 35px !important;
+    }
+    .tag:after{
+        display: none !important;
+    }
 </style>
+<h3>新建文章</h3>
 <div class="th-markdown" id="article">
     <div id="a-top">
         <div class="row">
@@ -19,16 +27,36 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <input id="a-tags" type="text" class="tags form-control" value="social, adverts, sales" />
-                <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+                <input id="a-tags" type="text" class="tags form-control" value="test" />
+                <div id="suggestions-container" style="position: relative; float: left; width: 250px; "></div>
             </div>
-            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <select id="a-kind" type="text" class="kind form-control col-xs-12">
+                    <option value="java">java</option>
+                    <option value="scala">scala</option>
+                    <option value="php">php</option>
+                </select>
+            </div>
         </div>
     </div>
     <div id="a-center">
         <textarea id="editor"></textarea>
     </div>
     <div id="a-bottom">
-        <div>bottom</div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="">
+                    <label>
+                        <input type="checkbox" class="js-switch" checked /> 允许评论
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align: right;">
+                <input class="btn btn-success" type="button" value="保存并发布">
+                <input class="btn btn-warning" type="button" value="保存为草稿">
+            </div>
+        </div>
     </div>
+    <div style="height: 60px;"></div>
+    <div class="clearfix"></div>
 </div>
