@@ -155,15 +155,15 @@ public class TreeHoleUtils {
         root.addChild(
                 new Menu("博客管理", "index1","fa-home")
                         .addChild(new Menu("基础信息","/admin/blog/basic"))
-                        .addChild(new Menu("统计信息","index/index1"))
-                        .addChild(new Menu("系统设置","index/index2"))
+                        .addChild(new Menu("统计信息","/admin/blog/statistic"))
+                        .addChild(new Menu("系统设置","/admin/blog/settings"))
         );
         root.addChild(
                 new Menu("文章管理", "index2","fa-edit")
-                        .addChild(new Menu("新建发布","index/index1"))
-                        .addChild(new Menu("历史管理","index/index2"))
-                        .addChild(new Menu("评论管理","index/index3"))
-                        .addChild(new Menu("分类与标签","index/index4"))
+                        .addChild(new Menu("新建发布","/admin/articles/publish"))
+                        .addChild(new Menu("历史管理","/admin/articles/history"))
+                        .addChild(new Menu("评论管理","/admin/articles/commonts"))
+                        .addChild(new Menu("分类与标签","/admin/articles/tags"))
         );
         root.addChild(
                 new Menu("素材管理", "index3","fa-desktop")

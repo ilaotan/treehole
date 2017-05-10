@@ -1,0 +1,34 @@
+<style>
+    .th-markdown #a-top{
+        padding-bottom: 20px;
+        padding-top: 100px;
+    }
+    .th-markdown #a-top input{
+        margin-bottom: 20px;
+    }
+</style>
+<div class="th-markdown" id="article">
+    <div id="a-top">
+        <div class="row">
+            <div class="col-md-6">
+                <input name="title" id="title" class="form-control col-xs-12" placeholder="文章标题">
+            </div>
+            <div class="col-md-6">
+                <input name="subpath" id="subpath" class="form-control col-xs-12" placeholder="访问地址 如 'article1' ,默认为文章编号">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input id="a-tags" type="text" class="tags form-control" value="social, adverts, sales" />
+                <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+    </div>
+    <div id="a-center">
+        <textarea id="editor"></textarea>
+    </div>
+    <div id="a-bottom">
+        <div>bottom</div>
+    </div>
+</div>
