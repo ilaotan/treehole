@@ -12,7 +12,8 @@ public enum TreeHoleEnum {
     SQL_CREATE_DB("db create"),
     SQL_CREATE_TABLE("table create"),
     LOGIN_USER_KEY("login_user"),
-    LOGIN_MENU_KEY("menus");
+    LOGIN_MENU_KEY("menus"),
+    THEME_BASEPATH("theme");
 
     private String value;
 

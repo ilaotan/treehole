@@ -1,0 +1,17 @@
+# Header
+menu:
+  主页: /
+  归档: archives
+  分类: categories
+  标签云: tags
+  关于我: about
+
+# Content
+excerpt_link: Read More
+fancybox: true
+
+# Miscellaneous
+google_analytics:
+favicon: /favicon.png
+
+rss: /atom.xml

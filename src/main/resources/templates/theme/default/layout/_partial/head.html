@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <script type="application/ld+json">
+    {
+        "@context": "http://blog.zhangyingwei.com/",
+        "@type": "Website",
+        "publisher": "张英伟的博客",
+        "url": "http://blog.zhangyingwei.com/",
+        "description": "我是张英伟，山西人，java程序员。"
+    }
+  </script>
+  <%
+  var title = page.title;
+  %>
+  <title><% if (title){ %>#{title} - <% } %>#{config.title}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <%if(theme.rss!=null){ %>
+    <link rel="alternative" href="#{theme.rss}" title="#{config.title}" type="application/atom+xml">
+  <%} %>
+  <%if(theme.favicon){ %>
+    <link rel="icon" href="#{theme.favicon}">
+  <%} %>
+  <link href="../source/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="../source/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+</head>

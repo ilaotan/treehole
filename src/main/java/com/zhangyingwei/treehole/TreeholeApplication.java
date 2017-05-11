@@ -12,11 +12,13 @@ import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfigurati
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {ThymeleafAutoConfiguration.class})
 @Configuration
 @MapperScan(basePackages = {"com.zhangyingwei.treehole"})
+@PropertySource("classpath:treehole.properties")
 public class TreeholeApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TreeholeApplication.class, args);

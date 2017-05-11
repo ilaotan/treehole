@@ -1,0 +1,9 @@
+<% include("_partial/head.html",{page:{is_archive:true}}){} %>
+<body>
+  <div id="container">
+    <% include('_partial/header.html', {cache: !config.relative_link}){} %>
+    <% include('_partial/footer.html', {cache: !config.relative_link}){} %>
+    <% include('_partial/after-footer.html'){} %>
+  </div>
+</body>
+</html>
