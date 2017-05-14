@@ -18,18 +18,32 @@ import java.util.Map;
 @RequestMapping("/admin/articles")
 public class ArticleController {
 
+    /**
+     * 路由到 新建文章发布页面
+     * @return
+     */
     @GetMapping("/publish")
     public String indexPublish(){
         return Pages.ADMIN_ARTICLES_PUBLISH;
     }
 
+    /**
+     * 发布文章
+     * @param model
+     * @param article
+     * @return
+     */
     @PostMapping("/publish")
     public String publish(Map<String, Object> model, @Valid Article article) {
         return "redirect:/admin/articles/history";
     }
 
+    /**
+     * 路由到 历史文章管理页面
+     * @return
+     */
     @GetMapping("/history")
-    public String hisrotyIndex(){
+    public String indexHisroty(){
         return Pages.ADMIN_ARTICLES_HISTORY;
     }
 }
