@@ -8,55 +8,61 @@
     }
     #a-tags_tagsinput{
         min-height: 20px !important;
-        height: 35px !important;
+        height: 36px !important;
     }
     .tag:after{
         display: none !important;
     }
+    #a-tags_addTag input{
+        margin-bottom: 0 !important;
+    }
 </style>
 <h3>新建文章</h3>
 <div class="th-markdown" id="article">
-    <div id="a-top">
-        <div class="row">
-            <div class="col-md-6">
-                <input name="title" id="title" class="form-control col-xs-12" placeholder="文章标题">
-            </div>
-            <div class="col-md-6">
-                <input name="subpath" id="subpath" class="form-control col-xs-12" placeholder="访问地址 如 'article1' ,默认为文章编号">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <input id="a-tags" type="text" class="tags form-control" value="test" />
-                <div id="suggestions-container" style="position: relative; float: left; width: 250px; "></div>
-            </div>
-            <div class="col-md-6">
-                <select id="a-kind" type="text" class="kind form-control col-xs-12">
-                    <option value="java">java</option>
-                    <option value="scala">scala</option>
-                    <option value="php">php</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div id="a-center">
-        <textarea id="editor"></textarea>
-    </div>
-    <div id="a-bottom">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="">
-                    <label>
-                        <input type="checkbox" class="js-switch" checked /> 允许评论
-                    </label>
+    <form id="mdform" method="post" action="/admin/articles/publish">
+        <input hidden type="text" name="type" id="submitType">
+        <div id="a-top">
+            <div class="row">
+                <div class="col-md-6">
+                    <input name="title" id="title" required="required" class="form-control col-xs-12" placeholder="文章标题">
+                </div>
+                <div class="col-md-6">
+                    <input name="subpath" id="subpath" class="form-control col-xs-12" placeholder="访问地址 如 'article1' ,默认为文章编号">
                 </div>
             </div>
-            <div class="col-md-4" style="text-align: right;">
-                <input class="btn btn-success" type="button" value="保存并发布">
-                <input class="btn btn-warning" type="button" value="保存为草稿">
+            <div class="row">
+                <div class="col-md-6">
+                    <input name="tags" id="a-tags" type="text" class="tags form-control" value="" />
+                    <div id="suggestions-container" style="position: relative; float: left; width: 250px; "></div>
+                </div>
+                <div class="col-md-6">
+                    <select id="a-kind" name="kind" type="text" class="kind form-control col-xs-12">
+                        <option value="java">java</option>
+                        <option value="scala">scala</option>
+                        <option value="php">php</option>
+                    </select>
+                </div>
             </div>
         </div>
-    </div>
-    <div style="height: 60px;"></div>
-    <div class="clearfix"></div>
+        <div id="a-center">
+            <textarea name="article" id="editor"></textarea>
+        </div>
+        <div id="a-bottom">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="">
+                        <label>
+                            <input type="checkbox" class="js-switch" checked /> 允许评论
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4" style="text-align: right;">
+                    <input class="btn btn-success" type="button" id="save_publish" value="保存并发布">
+                    <input class="btn btn-warning" type="button" id="save" value="保存为草稿">
+                </div>
+            </div>
+        </div>
+        <div style="height: 60px;"></div>
+        <div class="clearfix"></div>
+    </form>
 </div>
