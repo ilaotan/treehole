@@ -20,6 +20,22 @@ public class Article {
     @NotNull(message = "文章内容不能为空")
     private String article;
     private String intro;
+    private String usecommont;
+    /**
+     * 0 保存
+     * 1 发布
+     * 9 删除
+     */
+    private Integer flag = 0;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getTitle() {
         return title;
@@ -78,6 +94,41 @@ public class Article {
         }
     }
 
+    public String getUsecommont() {
+        return usecommont;
+    }
+
+    public void setUsecommont(String usecommont) {
+        this.usecommont = usecommont;
+    }
+
+    public Integer getFlag() {
+        return bulidFlag(type);
+    }
+
+    /**
+     * 根据 type 生成 flag
+     * save 0
+     * save_publish 1
+     * 9
+     * @param type
+     * @return
+     */
+    private Integer bulidFlag(String type) {
+        switch (type){
+            case "save":
+                return 0;
+            case "save_publish":
+                return 1;
+            default:
+                return 9;
+        }
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
+    }
+
     @Override
     public String toString() {
         return "Article{" +
@@ -87,6 +138,8 @@ public class Article {
                 ", kind='" + kind + '\'' +
                 ", article='" + article + '\'' +
                 ", intro='" + intro + '\'' +
+                ", usecommont=" + usecommont +
+                ", flag=" + flag +
                 '}';
     }
 }

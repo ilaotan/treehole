@@ -15,7 +15,9 @@ $(function(){
             return this;
         },
         init:function () {
-            this.model.value("这里是文章简介 \n\n<!-- more --> \n\n这里是文章内容")
+            if(!this.model.value()){
+                this.model.value("这里是文章简介 \n\n<!-- more --> \n\n这里是文章内容")
+            }
             return this;
         },
         getContext:function(){
@@ -78,4 +80,7 @@ $(function(){
             form.submit();
         }
     });
+    if($("#error-msg").text()){
+        layer.msg($("#error-msg").text());
+    }
 })

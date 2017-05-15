@@ -19,40 +19,41 @@
 </style>
 <h3>新建文章</h3>
 <div class="th-markdown" id="article">
+    <span hidden id="error-msg">${msg!}</span>
     <form id="mdform" method="post" action="/admin/articles/publish">
         <input hidden type="text" name="type" id="submitType">
         <div id="a-top">
             <div class="row">
                 <div class="col-md-6">
-                    <input name="title" id="title" required="required" class="form-control col-xs-12" placeholder="文章标题">
+                    <input name="title" id="title" value="${article.title!}" required="required" class="form-control col-xs-12" placeholder="文章标题">
                 </div>
                 <div class="col-md-6">
-                    <input name="subpath" id="subpath" class="form-control col-xs-12" placeholder="访问地址 如 'article1' ,默认为文章编号">
+                    <input name="subpath" id="subpath" value="${article.subpath!}" class="form-control col-xs-12" placeholder="访问地址 如 'article1' ,默认为文章编号">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <input name="tags" id="a-tags" type="text" class="tags form-control" value="" />
+                    <input name="tags" id="a-tags" type="text" class="tags form-control" value="${article.tags!}" />
                     <div id="suggestions-container" style="position: relative; float: left; width: 250px; "></div>
                 </div>
                 <div class="col-md-6">
                     <select id="a-kind" name="kind" type="text" class="kind form-control col-xs-12">
-                        <option value="java">java</option>
-                        <option value="scala">scala</option>
-                        <option value="php">php</option>
+                        <% for(kind in kinds){%>
+                            <option value="${kind.id!}">${kind.name!}</option>
+                        <%}%>
                     </select>
                 </div>
             </div>
         </div>
         <div id="a-center">
-            <textarea name="article" id="editor"></textarea>
+            <textarea name="article" id="editor">${article.article!}</textarea>
         </div>
         <div id="a-bottom">
             <div class="row">
                 <div class="col-md-8">
                     <div class="">
                         <label>
-                            <input type="checkbox" class="js-switch" checked /> 允许评论
+                            <input name="usecommont" type="checkbox" value="${article.usecommont!}" class="js-switch" checked /> 允许评论
                         </label>
                     </div>
                 </div>
