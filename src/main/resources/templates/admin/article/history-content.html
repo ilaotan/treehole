@@ -2,9 +2,26 @@
     #article_container{
         width: 100%;
     }
-    .fancy-grid{
-        width:100% !important;
-    }
 </style>
 <h3>历史文章管理</h3>
-<div id="article_container" ></div>
+<div id="article_container" >
+    <el-table
+            :data="tableData"
+            stripe
+            style="width: 100%">
+        <el-table-column
+                prop="date"
+                label="日期"
+                width="180">
+        </el-table-column>
+        <el-table-column
+                prop="name"
+                label="姓名"
+                width="180">
+        </el-table-column>
+        <el-table-column
+                prop="address"
+                label="地址">
+        </el-table-column>
+    </el-table>
+</div>
