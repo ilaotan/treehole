@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
  * @desc: 文章
  */
 public class Article {
+    private String id;
     @NotNull(message = "文章标题不能为空")
     private String title;
     private String subpath;
@@ -103,7 +104,10 @@ public class Article {
     }
 
     public Integer getFlag() {
-        return bulidFlag(type);
+        if(StringUtils.isNotEmpty(this.type)){
+            return bulidFlag(type);
+        }
+        return this.flag;
     }
 
     /**
@@ -127,6 +131,14 @@ public class Article {
 
     public void setFlag(Integer flag) {
         this.flag = flag;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

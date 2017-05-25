@@ -22,7 +22,7 @@ public class ArticleService {
     private ArticleDao articleDao;
 
     /**
-     * 查询所有文章列表
+     * 查询所有文章类型列表
      * @return
      * @throws TreeHoleException
      */
@@ -42,8 +42,8 @@ public class ArticleService {
     public List<Article> getArticles() throws TreeHoleException {
         try {
             return this.articleDao.selectArticles();
-        } catch (TreeHoleException e) {
-            throw new TreeHoleException("查询文章错误", e);
+        } catch (Exception e) {
+            throw new TreeHoleException("查询所有文章错误: "+e.getMessage());
         }
     }
 
@@ -85,7 +85,7 @@ public class ArticleService {
                 }
             }
             this.articleDao.insertArticle(article);
-        } catch (TreeHoleException e) {
+        } catch (Exception e) {
             throw new TreeHoleException(e.getLocalizedMessage());
         }
     }

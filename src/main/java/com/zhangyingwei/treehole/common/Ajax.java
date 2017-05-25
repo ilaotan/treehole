@@ -18,12 +18,12 @@ public class Ajax {
     public static final String MSG_SUCCESS = "success";
 
     /**
-     * code of error
+     * code of ajax error
      */
     public static final int CODE_ERROR = 400;
 
     /**
-     * message of error
+     * message of ajax error
      */
     public static final String MSG_ERROR = "error";
 

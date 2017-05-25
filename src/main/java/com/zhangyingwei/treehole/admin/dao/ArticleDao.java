@@ -15,11 +15,14 @@ import java.util.List;
  */
 @Mapper
 public interface ArticleDao {
-    @Select("select * from article where delflag=0")
-    List<Article> selectArticles() throws TreeHoleException;
+    @Select("select * from article")
+    List<Article> selectArticles() throws Exception;
+
+    @Select("select * from article where flag = 0")
+    List<Article> selectActiveArticles() throws Exception;
 
     @Insert("insert into article(title,subpath,tags,intro,article,kind,usecommont,flag) values(#{article.title},#{article.subpath},#{article.tags},#{article.intro},#{article.article},#{article.kind},#{article.usecommont},#{article.flag})")
-    void insertArticle(@Param("article") Article article) throws TreeHoleException;
+    void insertArticle(@Param("article") Article article) throws Exception;
 
     @Select("select * from article where subpath=#{subpath}")
     Article selectArticleBySubpath(@Param("subpath") String subpath);

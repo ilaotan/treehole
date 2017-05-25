@@ -65,7 +65,9 @@ public class ArticleController {
      * @return
      */
     @GetMapping("/history")
-    public String indexHisroty(){
+    public String indexHisroty(Map<String,Object> model) throws TreeHoleException {
+        List<Article> articles = this.articleService.getArticles();
+        model.put("articles", articles);
         return Pages.ADMIN_ARTICLES_HISTORY;
     }
 }
