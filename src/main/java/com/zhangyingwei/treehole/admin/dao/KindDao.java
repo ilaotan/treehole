@@ -13,4 +13,6 @@ import java.util.List;
 public interface KindDao {
     @Select("select * from kind")
     List<Kind> selectKinds();
+    @Select("select * from kind where flag <> 9")
+    List<Kind> selectActiveKinds();
 }

@@ -1,0 +1,35 @@
+<style>
+    .danger{
+        background: #d9534f !important;
+    }
+</style>
+<h3>分类管理</h3>
+<div id="kind_container" >
+    <div class="x_panel">
+        <div class="x_content">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>名称</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for(kind in kinds) {%>
+                    <tr>
+                        <td> ${kind.id!} </td>
+                        <td> ${kind.name!} </td>
+                        <td class="kind-flag"> ${kind.flag!} </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-primary handEdit" index ="${kindLP.index}">编辑</button>
+                            <button type="button" class="btn btn-sm btn-danger handDelete" index = "${kindLP.index}">删除</button>
+                        </td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

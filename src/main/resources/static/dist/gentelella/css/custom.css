@@ -2619,19 +2619,7 @@ ul.timeline li {
     background: #1ABB9C;
     color: #fff !important
 }
-.tag:after {
-    content: " ";
-    height: 30px;
-    width: 0;
-    position: absolute;
-    left: 100%;
-    top: 0;
-    margin: 0;
-    pointer-events: none;
-    border-top: 14px solid transparent;
-    border-bottom: 14px solid transparent;
-    border-left: 11px solid #1ABB9C
-}
+
 .timeline h2.title {
     position: relative;
     font-size: 16px;
