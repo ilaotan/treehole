@@ -288,6 +288,18 @@ public class TreeHoleUtils {
     }
 
     /**
+     * 获取统一数据状态数据字典
+     */
+    public static Map<String,String> getGolbleStateDic(){
+        return new HashMap<String, String>(){
+            {
+                put("0", "正常");
+                put("9", "已删除");
+            }
+        };
+    }
+
+    /**
      * 获取浏览器类型
      * @param request
      * @return

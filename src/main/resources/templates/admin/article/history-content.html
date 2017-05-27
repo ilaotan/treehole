@@ -2,6 +2,9 @@
     #article_container{
         width: 100%;
     }
+    .tag-org{
+        background-color: #FF9800 !important;
+    }
 </style>
 <h3>历史文章管理</h3>
 <div id="article_container" >
@@ -30,10 +33,26 @@
                         <td>${ article.intro! }</td>
                         <td>${ article.subpath! }</td>
                         <td>${ article.article! }</td>
-                        <td>${ article.kind! }</td>
+                        <td><span class="tag">${ article.kind! }</span></td>
+                        <%
+                            article.tags = strutil.replace(article.tags,",","</span><span class='tag tag-org'>");
+                            article.tags = "<span class='tag tag-org'>"+article.tags+"</span>";
+                        %>
                         <td>${ article.tags! }</td>
-                        <td>${ article.usecommont! }</td>
-                        <td>${ article.flag! }</td>
+                        <%
+                            var commClass = "fa-close";
+                            if(article.usecommont == "on"){
+                                commClass = "fa-check";
+                            }
+                        %>
+                        <td><span class="fa ${commClass}"></span></td>
+                        <%
+                            var class = "label-info";
+                            if(article.flag==9){
+                                class = "label-danger";
+                            }
+                        %>
+                        <td><span class="label ${class}" value="${article.flag!}">${ session.stateDic[article.flag+""]! }</span></td>
                     </tr>
                 <% } %>
                 </tbody>

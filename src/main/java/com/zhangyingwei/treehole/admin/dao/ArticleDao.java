@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Mapper
 public interface ArticleDao {
-    @Select("select * from article")
+    @Select("select a.id,a.title,a.subpath,a.tags,a.intro,a.article,k.name as kind,a.usecommont,a.flag from article as a left join kind k on a.kind = k.id")
     List<Article> selectArticles() throws Exception;
 
     @Select("select * from article where flag = 0")

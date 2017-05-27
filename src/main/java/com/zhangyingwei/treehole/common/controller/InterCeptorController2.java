@@ -1,5 +1,6 @@
 package com.zhangyingwei.treehole.common.controller;
 
+import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -36,6 +37,9 @@ public class InterCeptorController2 {
             TreeHoleUtils.login(session);
 //            logger.info("没有登录");
 //            response.sendRedirect("/admin");
+        }
+        if (session.getAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue()) == null) {
+            session.setAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue(),TreeHoleUtils.getGolbleStateDic());
         }
         // 记录下请求内容
         logger.info("URL : " + request.getRequestURL().toString());
