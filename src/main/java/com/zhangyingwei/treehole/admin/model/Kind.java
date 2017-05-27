@@ -12,6 +12,16 @@ public class Kind {
     //名称
     private String name;
 
+    private Integer flag;
+
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
+    }
+
     public Integer getId() {
         return id;
     }
