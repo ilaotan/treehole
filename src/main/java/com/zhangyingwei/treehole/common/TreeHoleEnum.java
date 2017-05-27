@@ -14,7 +14,8 @@ public enum TreeHoleEnum {
     LOGIN_USER_KEY("login_user"),
     LOGIN_MENU_KEY("menus"),
     THEME_BASEPATH("theme"),
-    STATE_DIC_KEY("stateDic");
+    STATE_DIC_KEY("stateDic"),
+    UPLOAD_FILE_BASEPATH("upload/");
 
     private String value;
 

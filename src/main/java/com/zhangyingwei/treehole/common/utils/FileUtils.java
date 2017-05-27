@@ -2,17 +2,18 @@ package com.zhangyingwei.treehole.common.utils;
 
 
 import com.zhangyingwei.treehole.common.config.TreeHoleConfig;
+import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by zhangyw on 2017/4/21.
  */
 public class FileUtils {
-
+    private static Logger logger = LoggerFactory.getLogger(FileUtils.class);
     /**
      * 判断文件是否存在
      * @param path
@@ -46,5 +47,30 @@ public class FileUtils {
 
     public static void main(String[] args) {
         FileUtils.formatFileType("src/main/resources/templates/theme/default", ".ejs", ".html");
+    }
+
+    /**
+     * 保存文件
+     * @param filePath
+     * @param bytes
+     */
+    public static void saveFile(String filePath, byte[] bytes) throws TreeHoleException {
+        File file = new File(filePath);
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                logger.error(e.getLocalizedMessage());
+                throw new TreeHoleException("创建文件错误");
+            }
+        }
+        try {
+            FileOutputStream outputStream = new FileOutputStream(file);
+            outputStream.write(bytes);
+            outputStream.close();
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            throw new TreeHoleException("保存文件内容错误");
+        }
     }
 }

@@ -6,6 +6,8 @@ import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.install.model.DbConf;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,8 @@ import java.util.*;
  * Created by zhangyw on 2017/4/21.
  */
 public class TreeHoleUtils {
+
+    private static Logger logger = LoggerFactory.getLogger(TreeHoleUtils.class);
 
     /**
      * 判断是否已经安装
@@ -167,7 +171,7 @@ public class TreeHoleUtils {
         );
         root.addChild(
                 new Menu("素材管理", "index3","fa-desktop")
-                        .addChild(new Menu("素材管理","index/index1"))
+                        .addChild(new Menu("素材管理","/admin/files"))
         );
         return root;
     }
@@ -306,5 +310,28 @@ public class TreeHoleUtils {
      */
     public static String getBorwe(HttpServletRequest request) {
         return request.getHeader("User-Agent");
+    }
+
+    /**
+     * 获取上传文件的位置
+     * @param originalFilename
+     * @return
+     */
+    private static String getFilePath(String originalFilename) {
+        return TreeHoleEnum.UPLOAD_FILE_BASEPATH.getValue() + originalFilename;
+    }
+
+    /**
+     * 保存上传的文件
+     * @param originalFilename
+     * @param bytes
+     */
+    public static void saveUploadFile(String originalFilename, byte[] bytes) throws TreeHoleException {
+        try{
+            FileUtils.saveFile(getFilePath(originalFilename), bytes);
+        }catch (Exception e){
+            logger.error(e.getLocalizedMessage());
+            throw new TreeHoleException(e.getLocalizedMessage());
+        }
     }
 }

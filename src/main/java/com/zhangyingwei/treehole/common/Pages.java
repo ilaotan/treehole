@@ -18,6 +18,7 @@ public class Pages {
     public static final String BLOG_THEME_INDEX = "layout/layout";
     public static final String ADMIN_ARTICLES_HISTORY = "admin/article/history-index";
     public static final String ADMIN_KIND = "admin/article/kind-index";
+    public static final String ADMIN_FILEMANAGE = "admin/file/file-index";
 
     public static String blog(TreeHoleConfig config,String themePage){
         return TreeHoleEnum.THEME_BASEPATH.getValue() + "/" + config.getTheme() + "/" + themePage;

@@ -22,6 +22,7 @@
                     <th>标签</th>
                     <th>允许评论</th>
                     <th>状态</th>
+                    <th>编辑</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -53,11 +54,17 @@
                             }
                         %>
                         <td><span class="label ${class}" value="${article.flag!}">${ session.stateDic[article.flag+""]! }</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-primary">编辑</button>
+                            <button class="btn btn-sm btn-danger">删除</button>
+                        </td>
                     </tr>
                 <% } %>
                 </tbody>
             </table>
+            <div class="page">
 
+            </div>
         </div>
     </div>
 </div>
