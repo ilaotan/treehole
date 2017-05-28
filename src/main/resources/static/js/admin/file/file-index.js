@@ -43,7 +43,7 @@ $(function () {
             bodyHtml += "<td>" + this.id + "</td>";
             bodyHtml += "<td>" + this.name + "</td>";
             bodyHtml += "<td>" + this.contentType + "</td>";
-            bodyHtml += "<td><span>" + uurl + "</span><a class='copyContent'>复制<a></td>";
+            bodyHtml += "<td><input style='padding: 3px;width: 250px;' readonly='readonly' type='text' value='" + uurl + "'><a class='copyContent'> [复制]<a></td>";
             bodyHtml += "<td><i class='fa fa-eye showDetail'></i></td>";
             bodyHtml += "<td><button class='btn btn-danger btn-sm deleteBtn' value='"+this.id+"'>删除</td>";
             bodyHtml += "</tr>";
@@ -55,9 +55,10 @@ $(function () {
         })
 
         $(".showDetail").click(function () {
-            var url = $(this).parent().prev().text();
+            var url = $(this).parent().prev().find("input").val();
             var contentType = $(this).parent().prev().prev().text();
-            if(contentType!="image/png"){
+            var validContentTyope = ["image/png", "image/jpg", "image/jpeg", "image/gif"];
+            if($.inArray(contentType,validContentTyope)<0){
                 layer.msg("暂时无法预览此类文件");
                 return;
             }
@@ -72,40 +73,10 @@ $(function () {
         });
 
         $(".copyContent").click(function () {
-            var text = $(this).prev().text();
-            copyToClipboard(text)
+            $(this).parent().find("input").select();
+            document.execCommand("Copy");
             layer.msg("小主，内容已经复制到剪贴板");
         });
     }
     getFileInfos();
-    function copyToClipboard(txt) {
-        if (window.clipboardData) {
-            window.clipboardData.clearData();
-            window.clipboardData.setData("Text", txt);
-            alert("已经成功复制到剪帖板上！");
-        } else if (navigator.userAgent.indexOf("Opera") != -1) {
-            window.location = txt;
-        } else if (window.netscape) {
-            try {
-                netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
-            } catch (e) {
-                alert("被浏览器拒绝！\n请在浏览器地址栏输入'about:config'并回车\n然后将'signed.applets.codebase_principal_support'设置为'true'");
-            }
-            var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
-            if (!clip) return;
-            var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
-            if (!trans) return;
-            trans.addDataFlavor('text/unicode');
-            var str = new Object();
-            var len = new Object();
-            var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-            var copytext = txt;
-            str.data = copytext;
-            trans.setTransferData("text/unicode", str, copytext.length * 2);
-            var clipid = Components.interfaces.nsIClipboard;
-            if (!clip) return false;
-            clip.setData(trans, null, clipid.kGlobalClipboard);
-            alert("已经成功复制到剪帖板上！");
-        }
-    }
 });
