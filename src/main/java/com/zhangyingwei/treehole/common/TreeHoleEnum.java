@@ -15,7 +15,8 @@ public enum TreeHoleEnum {
     LOGIN_MENU_KEY("menus"),
     THEME_BASEPATH("theme"),
     STATE_DIC_KEY("stateDic"),
-    UPLOAD_FILE_BASEPATH("upload/");
+    UPLOAD_FILE_BASEPATH("upload/"),
+    RES_IMG_DEFAULT("src/main/resources/static/images/default.jpg");
 
     private String value;
 

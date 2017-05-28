@@ -1,19 +1,21 @@
 package com.zhangyingwei.treehole.admin.controller;
 
+import com.zhangyingwei.treehole.admin.model.FileRes;
 import com.zhangyingwei.treehole.admin.service.FileManagerService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.Pages;
+import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,4 +42,50 @@ public class FileManageController {
         return Ajax.success("success");
     }
 
+    @GetMapping("/{fileAlias}")
+    public void downLoad(@PathVariable("fileAlias") String fileAlias, HttpServletResponse response){
+        FileRes fileRes = null;
+        File file = null;
+        try {
+            fileRes = this.fileManagerService.findFileByAlias(fileAlias);
+            file = new File(fileRes.getPath());
+            response.setCharacterEncoding("UTF-8");
+            response.setHeader("content-type", fileRes.getContentType());
+            response.setHeader("Content-Disposition", "attachment;filename=" + file.getName());
+        } catch (FileNotFoundException e) {
+            file = new File(TreeHoleEnum.RES_IMG_DEFAULT.getValue());
+            logger.info("file not found show the defalue image");
+        }
+        byte[] buff = new byte[1024];
+        BufferedInputStream bis = null;
+        OutputStream os = null;
+        try {
+            os = response.getOutputStream();
+            bis = new BufferedInputStream(new FileInputStream(file));
+            int i = bis.read(buff);
+            while (i != -1) {
+                os.write(buff, 0, buff.length);
+                os.flush();
+                i = bis.read(buff);
+            }
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        } finally {
+            if (bis != null) {
+                try {
+                    bis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        logger.info(StringUtils.join("download file:",file.getName()));
+    }
+
+    @GetMapping("/list")
+    @ResponseBody
+    public Map<String, Object> listFiles() throws TreeHoleException {
+        List<FileRes> files = this.fileManagerService.findFiles();
+        return Ajax.success(files);
+    }
 }

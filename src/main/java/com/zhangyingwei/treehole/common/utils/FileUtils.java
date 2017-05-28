@@ -73,4 +73,17 @@ public class FileUtils {
             throw new TreeHoleException("保存文件内容错误");
         }
     }
+
+    /**
+     * 创建文件夹
+     * @param path
+     */
+    public static void createDir(String path) {
+        File file = new File(path);
+        if(!file.exists()){
+            file.mkdirs();
+        }else if(!file.isDirectory()){
+            file.mkdirs();
+        }
+    }
 }

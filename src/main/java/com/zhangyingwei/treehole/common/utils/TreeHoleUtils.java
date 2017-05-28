@@ -317,7 +317,7 @@ public class TreeHoleUtils {
      * @param originalFilename
      * @return
      */
-    private static String getFilePath(String originalFilename) {
+    public static String getFilePath(String originalFilename) {
         return TreeHoleEnum.UPLOAD_FILE_BASEPATH.getValue() + originalFilename;
     }
 
@@ -328,10 +328,27 @@ public class TreeHoleUtils {
      */
     public static void saveUploadFile(String originalFilename, byte[] bytes) throws TreeHoleException {
         try{
+            //创建上传文件文件夹
+            createUploadBasePath();
             FileUtils.saveFile(getFilePath(originalFilename), bytes);
         }catch (Exception e){
             logger.error(e.getLocalizedMessage());
             throw new TreeHoleException(e.getLocalizedMessage());
         }
+    }
+
+    /**
+     * 创建文件上传文件夹
+     */
+    private static void createUploadBasePath() {
+        FileUtils.createDir(TreeHoleEnum.UPLOAD_FILE_BASEPATH.getValue());
+    }
+
+    /**
+     * 判断素材是否已经存在
+     * @param originalFilename
+     */
+    public static boolean fileExits(String originalFilename) {
+        return FileUtils.exists(getFilePath(originalFilename));
     }
 }
