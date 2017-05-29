@@ -51,7 +51,25 @@ $(function () {
         tbody.html(bodyHtml);
 
         $(".deleteBtn").click(function () {
-            layer.msg("delete :"+$(this).val())
+            var id = $(this).val();
+            var index = layer.load(1);
+            $.ajax({
+                url : "/admin/files/"+ id,
+                type: "DELETE",
+                success: function(data){
+                    if(data.code === 200){
+                        layer.msg("删除素材成功");
+                        getFileInfos();
+                    }else{
+                        layer.msg(data.message);
+                    }
+                    layer.close(index);
+                },
+                error: function(data){
+                    layer.close(index);
+                    layer.msg(data.message)
+                }
+            })
         })
 
         $(".showDetail").click(function () {

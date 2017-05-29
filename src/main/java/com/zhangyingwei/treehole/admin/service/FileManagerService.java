@@ -71,7 +71,7 @@ public class FileManagerService {
      * @param alias
      * @return File
      */
-    public FileRes findFileByAlias(String alias) throws FileNotFoundException {
+    public FileRes findFileByAlias(String alias) throws Exception {
         FileRes fileRes = this.fileResDao.selectByAlias(alias);
         if(fileRes == null){
             throw new FileNotFoundException("资源未找到");
@@ -88,6 +88,30 @@ public class FileManagerService {
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
             throw new TreeHoleException("查询文件列表错误");
+        }
+    }
+
+    /**
+     * 从数据库删除文件信息
+     * @param id
+     */
+    public void deleteFileInfo(String id) throws TreeHoleException {
+        try {
+            this.fileResDao.deleteById(id);
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            throw new TreeHoleException("删除文件信息错误");
+        }
+    }
+
+    /**
+     * 从硬盘中删除文件
+     * @param id
+     */
+    public void deleteFile(String id){
+        FileRes fileRes = this.fileResDao.selectById(id);
+        if(fileRes!=null){
+            TreeHoleUtils.deleteUploadFile(fileRes.getPath());
         }
     }
 }

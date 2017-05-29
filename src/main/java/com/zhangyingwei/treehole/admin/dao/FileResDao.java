@@ -1,10 +1,7 @@
 package com.zhangyingwei.treehole.admin.dao;
 
 import com.zhangyingwei.treehole.admin.model.FileRes;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,8 +14,14 @@ public interface FileResDao {
     void insert(@Param("file") FileRes fileRes) throws Exception;
 
     @Select("select * from files where alias=#{alias}")
-    FileRes selectByAlias(@Param("alias") String alias);
+    FileRes selectByAlias(@Param("alias") String alias) throws  Exception;
+
+    @Select("select * from files where id=#{id}")
+    FileRes selectById(@Param("id") String id);
 
     @Select("select * from files order by id desc")
     List<FileRes> selectFiles() throws Exception;
+
+    @Delete("delete from files where id=#{id}")
+    void deleteById(@Param("id") String id) throws Exception;
 }

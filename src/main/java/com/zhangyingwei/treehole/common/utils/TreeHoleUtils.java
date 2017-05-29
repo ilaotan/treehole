@@ -351,4 +351,12 @@ public class TreeHoleUtils {
     public static boolean fileExits(String originalFilename) {
         return FileUtils.exists(getFilePath(originalFilename));
     }
+
+    /**
+     * 删除已经上传的文件
+     * @param path
+     */
+    public static void deleteUploadFile(String path) {
+        FileUtils.deleteFile(path);
+    }
 }

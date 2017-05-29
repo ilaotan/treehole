@@ -86,4 +86,12 @@ public class FileUtils {
             file.mkdirs();
         }
     }
+
+    /**
+     * 删除文件
+     * @param path
+     */
+    public static void deleteFile(String path) {
+        new File(path).deleteOnExit();
+    }
 }

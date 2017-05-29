@@ -52,7 +52,7 @@ public class FileManageController {
             response.setCharacterEncoding("UTF-8");
             response.setHeader("content-type", fileRes.getContentType());
             response.setHeader("Content-Disposition", "attachment;filename=" + file.getName());
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             file = new File(TreeHoleEnum.RES_IMG_DEFAULT.getValue());
             logger.info("file not found show the defalue image");
         }
@@ -80,6 +80,14 @@ public class FileManageController {
             }
         }
         logger.info(StringUtils.join("download file:",file.getName()));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    public Map<String,Object> delete(@PathVariable("id") String id) throws TreeHoleException {
+        this.fileManagerService.deleteFile(id);
+        this.fileManagerService.deleteFileInfo(id);
+        return Ajax.success("删除素材成功");
     }
 
     @GetMapping("/list")
