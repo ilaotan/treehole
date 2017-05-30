@@ -22,12 +22,27 @@ public class KindService {
     @Autowired
     private KindDao kindDao;
 
-    public List<Kind> getKinds() throws TreeHoleException{
-        try{
+    public List<Kind> getKinds() throws TreeHoleException {
+        try {
             return this.kindDao.selectKinds();
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.info(e);
             throw new TreeHoleException("查询分类信息错误");
+        }
+    }
+
+    /**
+     * 删除分类信息
+     * 实际上是修改状态
+     * @param id
+     * @throws TreeHoleException
+     */
+    public void deleteKindById(String id) throws TreeHoleException {
+        try {
+            this.kindDao.deleteById(id);
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            throw new TreeHoleException("删除分类信息错误");
         }
     }
 }

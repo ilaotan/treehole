@@ -167,7 +167,7 @@ public class TreeHoleUtils {
                         .addChild(new Menu("新建发布","/admin/articles/publish"))
                         .addChild(new Menu("历史管理","/admin/articles/history"))
                         .addChild(new Menu("评论管理","/admin/articles/commonts"))
-                        .addChild(new Menu("分类管理","/admin/articles/tags"))
+                        .addChild(new Menu("分类管理","/admin/articles/kinds"))
         );
         root.addChild(
                 new Menu("素材管理", "index3","fa-desktop")

@@ -8,7 +8,7 @@ $(function () {
     })
 
     function getFileInfos() {
-        var index = layer.load(1)
+        var index = layer.load(1);
         $.ajax({
             url: "/admin/files/list",
             type: "GET",
