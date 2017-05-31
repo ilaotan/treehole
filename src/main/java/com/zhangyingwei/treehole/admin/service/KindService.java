@@ -33,16 +33,54 @@ public class KindService {
 
     /**
      * 删除分类信息
-     * 实际上是修改状态
+     *
+     * 修改状态
+     * 彻底删除
+     *
      * @param id
+     * @param type
      * @throws TreeHoleException
      */
-    public void deleteKindById(String id) throws TreeHoleException {
+    public void deleteKindById(String id, String type) throws TreeHoleException {
         try {
-            this.kindDao.deleteById(id);
+            switch (type){
+                case "state":
+                    this.kindDao.deleteById(id);
+                    break;
+                case "any":
+                    this.kindDao.deleteByIdAny(id);
+                    break;
+            }
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
             throw new TreeHoleException("删除分类信息错误");
+        }
+    }
+
+    /**
+     * 编辑分类信息
+     * @param kind
+     * @throws TreeHoleException
+     */
+    public void editKindInfo(Kind kind) throws TreeHoleException {
+        try {
+            this.kindDao.updateById(kind);
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            throw new TreeHoleException("编辑分类信息错误");
+        }
+    }
+
+    /**
+     * 添加分类信息
+     * @param kind
+     */
+    public void addKindInfo(Kind kind) throws TreeHoleException {
+        try {
+            this.kindDao.insert(kind);
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            throw new TreeHoleException("添加分类信息错误");
         }
     }
 }

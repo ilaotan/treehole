@@ -7,11 +7,9 @@ import com.zhangyingwei.treehole.common.Pages;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +24,13 @@ import java.util.Map;
 public class KindController {
     @Autowired
     private KindService kindService;
+
+    /**
+     * 路由到分类页
+     * @param model
+     * @return
+     * @throws TreeHoleException
+     */
     @RequestMapping
     public String indexKind(Map<String,Object> model) throws TreeHoleException {
         List<Kind> kinds = this.kindService.getKinds();
@@ -33,10 +38,46 @@ public class KindController {
         return Pages.ADMIN_KIND;
     }
 
+    /**
+     * 通过id删除分类信息
+     * @param id
+     * @return
+     * @throws TreeHoleException
+     */
     @DeleteMapping("/{id}")
     @ResponseBody
-    public Map<String,Object> deleteById(@PathVariable("id") String id) throws TreeHoleException {
-        this.kindService.deleteKindById(id);
-        return Ajax.success("删除分类信息成功");
+    public Map<String,Object> deleteById(@PathVariable("id") String id,String type) throws TreeHoleException {
+        if(type!=null){
+            this.kindService.deleteKindById(id, type);
+            return Ajax.success("删除分类信息成功");
+        }else{
+            return Ajax.error("请求参数错误");
+        }
+    }
+
+    /**
+     * 修改分类信息
+     * @param kind
+     * @return
+     * @throws TreeHoleException
+     */
+    @PutMapping
+    @ResponseBody
+    public Map<String,Object> editKindInfo(@Valid Kind kind) throws TreeHoleException {
+        this.kindService.editKindInfo(kind);
+        return Ajax.success("修改分类信息成功");
+    }
+
+    /**
+     * 添加分类信息
+     * @param kind
+     * @return
+     * @throws TreeHoleException
+     */
+    @PostMapping
+    @ResponseBody
+    public Map<String,Object> addKindInfo(@Valid Kind kind) throws TreeHoleException {
+        this.kindService.addKindInfo(kind);
+        return Ajax.success("添加分类信息成功");
     }
 }

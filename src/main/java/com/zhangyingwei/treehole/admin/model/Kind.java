@@ -10,8 +10,9 @@ public class Kind {
     //编号
     private Integer id;
     //名称
+    @NotNull
     private String name;
-
+    @NotNull
     private Integer flag;
 
     public Integer getFlag() {

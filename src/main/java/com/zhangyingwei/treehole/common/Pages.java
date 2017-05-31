@@ -15,7 +15,7 @@ public class Pages {
     public static final String ADMIN_BLOG_STATISTIC = "admin/blog/statistic-index";
     public static final String ADMIN_BLOG_SETTINGS = "admin/blog/settings-index";
     public static final String ADMIN_ARTICLES_PUBLISH = "admin/article/publish-index";
-    public static final String BLOG_THEME_INDEX = "layout/layout";
+    public static final String BLOG_THEME_INDEX = "index";
     public static final String ADMIN_ARTICLES_HISTORY = "admin/article/history-index";
     public static final String ADMIN_KIND = "admin/article/kind-index";
     public static final String ADMIN_FILEMANAGE = "admin/file/file-index";
