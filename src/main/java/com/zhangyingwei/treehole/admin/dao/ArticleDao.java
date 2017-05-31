@@ -29,4 +29,6 @@ public interface ArticleDao {
 
     @Select("select * from article where title=#{title}")
     Article selectArticleByTitle(String title);
+    @Select("select * from article where kind=#{id}")
+    List<Article> selectArticleByKind(String id);
 }

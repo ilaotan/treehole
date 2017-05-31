@@ -1,6 +1,7 @@
 package com.zhangyingwei.treehole.admin.controller;
 
 import com.zhangyingwei.treehole.admin.model.Kind;
+import com.zhangyingwei.treehole.admin.service.ArticleService;
 import com.zhangyingwei.treehole.admin.service.KindService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.Pages;
