@@ -1,6 +1,11 @@
 package com.zhangyingwei.treehole.common.config;
 
 import com.zhangyingwei.treehole.TreeholeApplication;
+import com.zhangyingwei.treehole.common.function.DayFromString;
+import com.zhangyingwei.treehole.common.function.MonthFromString;
+import com.zhangyingwei.treehole.common.function.YearFromString;
+import org.beetl.core.Function;
+import org.beetl.core.GroupTemplate;
 import org.beetl.core.resource.ClasspathResourceLoader;
 import org.beetl.ext.spring.BeetlGroupUtilConfiguration;
 import org.beetl.ext.spring.BeetlSpringViewResolver;
@@ -10,6 +15,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.HashMap;
 
 /**
  * @author: zhangyw
@@ -26,7 +33,13 @@ public class BeetlConf {
         BeetlGroupUtilConfiguration beetlGroupUtilConfiguration = new BeetlGroupUtilConfiguration();
         ClasspathResourceLoader classpathResourceLoader = new ClasspathResourceLoader();
         beetlGroupUtilConfiguration.setResourceLoader(classpathResourceLoader);
-
+        beetlGroupUtilConfiguration.setFunctions(new HashMap<String,Function>(){
+            {
+                put("yearFromString", new YearFromString());
+                put("monthFromString", new MonthFromString());
+                put("dayFromString", new DayFromString());
+            }
+        });
         //读取配置文件信息
 //        beetlGroupUtilConfiguration.setConfigFileResource(patternResolver.getResource("classpath:beetl.properties"));
         return beetlGroupUtilConfiguration;
