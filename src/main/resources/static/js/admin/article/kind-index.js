@@ -114,9 +114,12 @@ $(function () {
                     if(data.code===200){
                         layer.close(load);
                         window.location.href = "/admin/articles/kinds";
+                    }else{
+                        layer.alert(data.message)
                     }
+                }else{
+                    layer.msg("无返回值");
                 }
-                layer.msg("无返回值");
                 layer.close(load)
             },
             error:function () {

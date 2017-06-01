@@ -1,6 +1,8 @@
 package com.zhangyingwei.treehole.admin.service;
 
+import com.zhangyingwei.treehole.admin.dao.ArticleDao;
 import com.zhangyingwei.treehole.admin.dao.KindDao;
+import com.zhangyingwei.treehole.admin.model.Article;
 import com.zhangyingwei.treehole.admin.model.Kind;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import org.apache.log4j.Logger;
@@ -21,6 +23,8 @@ public class KindService {
     private Logger logger = Logger.getLogger(KindService.class);
     @Autowired
     private KindDao kindDao;
+    @Autowired
+    private ArticleDao articleDao;
 
     public List<Kind> getKinds() throws TreeHoleException {
         try {
@@ -48,12 +52,16 @@ public class KindService {
                     this.kindDao.deleteById(id);
                     break;
                 case "any":
+                    List<Article> articles = this.articleDao.selectArticleByKind(id);
+                    if(articles!=null && articles.size()>0){
+                        throw new TreeHoleException("分类信息被引用");
+                    }
                     this.kindDao.deleteByIdAny(id);
                     break;
             }
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
-            throw new TreeHoleException("删除分类信息错误");
+            throw new TreeHoleException("删除分类信息错误:"+e.getLocalizedMessage());
         }
     }
 
