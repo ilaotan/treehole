@@ -11,9 +11,9 @@ import java.util.Map;
  * yaml配置文件操作工具类
  */
 public class YamlUtils {
-    public static Map<String,String> read(String path) throws FileNotFoundException {
+    public static Map<String,Object> read(String path) throws FileNotFoundException {
         File file = new File(path);
-        Map<String,String> yaml = (Map<String, String>) Yaml.load(file);
+        Map<String,Object> yaml = (Map<String, Object>) Yaml.load(file);
         return yaml;
     }
 }

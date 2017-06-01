@@ -22,6 +22,7 @@ public class Article {
     private String article;
     private String intro;
     private String usecommont;
+    private String date;
     /**
      * 0 保存
      * 1 发布
@@ -141,17 +142,28 @@ public class Article {
         this.id = id;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "Article{" +
-                "title='" + title + '\'' +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
                 ", subpath='" + subpath + '\'' +
                 ", tags='" + tags + '\'' +
                 ", kind='" + kind + '\'' +
                 ", article='" + article + '\'' +
                 ", intro='" + intro + '\'' +
-                ", usecommont=" + usecommont +
+                ", usecommont='" + usecommont + '\'' +
+                ", date='" + date + '\'' +
                 ", flag=" + flag +
+                ", type='" + type + '\'' +
                 '}';
     }
 }

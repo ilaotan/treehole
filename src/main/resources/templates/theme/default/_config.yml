@@ -20,9 +20,6 @@ exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
 github_username: luoyan35714
 highlighter: Pygments
 
-# Build settings
-markdown: kramdown
-
 baidu_analysis: 94be4b0f9fc5d94cc0d0415ea6761ae9
 
 FB:

@@ -3,6 +3,8 @@ package com.zhangyingwei.treehole.common.utils;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.config.TreeHoleConfig;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 /**
@@ -15,8 +17,8 @@ public class TreeHoleConfigUtils {
      * @param treeHoleConfig
      * @return
      */
-    public static Map<String,Object> readThremeYmlConfig(TreeHoleConfig treeHoleConfig){
-        String path = TreeHoleEnum.THEME_BASEPATH + "/" + treeHoleConfig.getTheme() + "/" + TreeHoleEnum.THEME_CONFIG.getValue();
-        return null;
+    public static Map<String,Object> readThremeYmlConfig(TreeHoleConfig treeHoleConfig) throws FileNotFoundException {
+        String path = "src/main/resources/templates/"+TreeHoleEnum.THEME_BASEPATH.getValue() + "/" + treeHoleConfig.getTheme() + "/" + TreeHoleEnum.THEME_CONFIG.getValue();
+        return YamlUtils.read(path);
     }
 }
