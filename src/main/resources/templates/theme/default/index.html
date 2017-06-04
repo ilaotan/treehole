@@ -10,6 +10,18 @@
                   <%
                     var this_year =  yearFromString(post.date,"yyyy-MM-dd HH:mm:ss");
                     var this_month =  monthFromString(post.date,"yyyy-MM-dd HH:mm:ss");
+                    //var index = postLP.index;
+                    //var next_year;
+                    //var next_month;
+                    //print(postLP.index);
+                    //print(post[postLP.index])
+                    if(!postLP.last){
+                        //next_year = yearFromString(post[postLP.index],"yyyy-MM-dd HH:mm:ss");
+                        //next_month = monthFromString(post[postLP.index],"yyyy-MM-dd HH:mm:ss");
+                    } else {
+                        //next_year = this_year;
+                        //next_month = this_month;
+                    }
                   %>
                   <% if(postLP.first){ %>
                     <li><a href="#year_${this_year}">${this_year}</a>
