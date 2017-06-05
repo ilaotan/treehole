@@ -48,6 +48,19 @@ public class ArticleService {
     }
 
     /**
+     * 查询所有已发布文章
+     * @return
+     * @throws TreeHoleException
+     */
+    public List<Article> getPosts() throws TreeHoleException {
+        try {
+            return this.articleDao.selectPosts();
+        } catch (Exception e) {
+            throw new TreeHoleException("查询所有已发布文章错误: "+e.getMessage());
+        }
+    }
+
+    /**
      * 根据subpath查询文章
      * @param subpath
      * @return
@@ -57,6 +70,19 @@ public class ArticleService {
             return this.articleDao.selectArticleBySubpath(subpath);
         } catch (Exception e) {
             throw new TreeHoleException("根据subpath查询文章错误",e);
+        }
+    }
+
+    /**
+     * 根据subpath查询已发布文章
+     * @param subpath
+     * @return
+     */
+    public Article getPostBySubPath(String subpath) throws TreeHoleException {
+        try {
+            return this.articleDao.selectPostBySubpath(subpath);
+        } catch (Exception e) {
+            throw new TreeHoleException("根据subpath查询已发布文章错误",e);
         }
     }
 
@@ -88,6 +114,20 @@ public class ArticleService {
     }
 
     /**
+     * 根据id查询已发布文章
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public Article getPostById(String id) throws TreeHoleException {
+        try {
+            return this.articleDao.selectPostById(id);
+        } catch (Exception e) {
+            throw new TreeHoleException("根据编号查询已发布文章错误", e);
+        }
+    }
+
+    /**
      * 新增文章
      * @param article
      * @throws TreeHoleException
@@ -109,6 +149,35 @@ public class ArticleService {
             this.articleDao.insertArticle(article);
         } catch (Exception e) {
             throw new TreeHoleException(e.getLocalizedMessage());
+        }
+    }
+
+    /**
+     * 通过id 发布文章
+     * 修改状态为发布状态即可
+     * @param id
+     */
+    public void addPublishArticle(String id) throws TreeHoleException {
+        try {
+            this.articleDao.publish(id);
+        } catch (Exception e) {
+            throw new TreeHoleException("发布文章错误", e);
+        }
+    }
+
+    /**
+     * 删除文章
+     * @param id
+     */
+    public void deleteArticle(String id,boolean state) throws TreeHoleException {
+        try{
+            if(state){
+                this.articleDao.deleteStateById(id);
+            }else{
+                this.articleDao.deleteById(id);
+            }
+        }catch (Exception e){
+            throw new TreeHoleException("删除文章错误", e);
         }
     }
 }

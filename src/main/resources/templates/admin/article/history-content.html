@@ -26,15 +26,15 @@
                 </thead>
                 <tbody>
                 <% for (article in articles){ %>
-                    <tr>
-                        <th scope="row">${ articleLP.index! }</th>
-                        <th hidden>${ article.id! }</th>
-                        <td>${ article.title!}</td>
-                        <td>${ article.intro! }</td>
-                        <td>${ article.subpath! }</td>
-                        <td><span class="tag">${ article.kind! }</span></td>
-                        <%
-                            article.tags = strutil.replace(article.tags,",","</span><span class='tag tag-org'>");
+                <tr>
+                    <th scope="row">${ articleLP.index! }</th>
+                    <th hidden>${ article.id! }</th>
+                    <td>${ article.title!}</td>
+                    <td>${ article.intro! }</td>
+                    <td>${ article.subpath! }</td>
+                    <td><span class="tag">${ article.kind! }</span></td>
+                    <%
+                    article.tags = strutil.replace(article.tags,",","</span><span class='tag tag-org'>");
                             article.tags = "<span class='tag tag-org'>"+article.tags+"</span>";
                         %>
                         <td>${ article.tags! }</td>
@@ -49,14 +49,23 @@
                             var class = "label-info";
                             if(article.flag==9){
                                 class = "label-danger";
+                            }else if(article.flag==1){
+                                class = "label-success";
                             }
                         %>
                         <td><span class="label ${class}" value="${article.flag!}">${ session.stateDic[article.flag+""]! }</span></td>
+                        <%
+                            var disabled = "";
+                            if(article.flag==1){
+                                disabled = "disabled";
+                            }
+                        %>
                         <td>
-                            <button class="btn btn-sm btn-primary">编辑</button>
-                            <button class="btn btn-sm btn-danger">删除</button>
+                            <button value="${article.id}" ${disabled} class="btn btn-sm btn-default btn-publish">发布</button>
+                            <button value="${article.id}" class="btn btn-sm btn-primary btn-edit">编辑</button>
+                            <button value="${article.id}" class="btn btn-sm btn-danger btn-delete">删除</button>
                         </td>
-                    </tr>
+                    </span></tr>
                 <% } %>
                 </tbody>
             </table>

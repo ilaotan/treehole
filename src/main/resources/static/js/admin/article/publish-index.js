@@ -79,7 +79,7 @@ $(function(){
         var article = MD.getArticle();
         var form = $("#mdform");
         $("#submitType").val("save");
-        MD.model.value(MD.getHtml());
+        $("#editorHtml").text(MD.getHtml());
         if(MD.validArticle(article)){
             form.submit();
         }
@@ -88,6 +88,12 @@ $(function(){
         layer.msg($("#error-msg").text());
     }
     $("#save_publish").click(function(){
-        console.log(MD.getHtml());
+        var article = MD.getArticle();
+        var form = $("#mdform");
+        $("#submitType").val("publish");
+        $("#editorHtml").text(MD.getHtml());
+        if(MD.validArticle(article)){
+            form.submit();
+        }
     })
 })

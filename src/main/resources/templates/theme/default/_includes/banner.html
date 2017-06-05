@@ -2,7 +2,7 @@
 <div class="banner">
   <div class="container">
   	<% if (page.categories != null){ %>
-    	<a href="${ blog.url+ '/categories/'}#{{page.categories}}-ref">${page.categories}</a>	/
+    	${page.categories}/
     <% }else{ %>
     	${ site.banner }
     <% } %>

@@ -20,7 +20,9 @@ public class Article {
     private String kind;
     @NotNull(message = "文章内容不能为空")
     private String article;
+    private String articleHtml;
     private String intro;
+    private String introHtml;
     private String usecommont;
     private String date;
     /**
@@ -96,6 +98,14 @@ public class Article {
         }
     }
 
+    private void bulidIntroHtml(){
+        if(StringUtils.isNotEmpty(this.articleHtml)){
+            if(this.articleHtml.contains("<!-- more -->")){
+                this.introHtml = this.articleHtml.split("<!-- more -->")[0].trim();
+            }
+        }
+    }
+
     public String getUsecommont() {
         return usecommont;
     }
@@ -123,7 +133,7 @@ public class Article {
         switch (type){
             case "save":
                 return 0;
-            case "save_publish":
+            case "publish":
                 return 1;
             default:
                 return 9;
@@ -148,6 +158,23 @@ public class Article {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getArticleHtml() {
+        return articleHtml;
+    }
+
+    public void setArticleHtml(String articleHtml) {
+        this.articleHtml = articleHtml;
+    }
+
+    public String getIntroHtml() {
+        this.bulidIntroHtml();
+        return introHtml;
+    }
+
+    public void setIntroHtml(String introHtml) {
+        this.introHtml = introHtml;
     }
 
     @Override

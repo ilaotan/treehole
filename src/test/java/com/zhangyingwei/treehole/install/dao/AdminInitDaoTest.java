@@ -16,11 +16,11 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AdminInitDaoTest {
-    @Autowired
-    private AdminInitDao adminInitDao;
+//    @Autowired
+//    private AdminInitDao adminInitDao;
     @Test
     public void init() throws Exception {
-        System.out.println(adminInitDao);
+//        System.out.println(adminInitDao);
     }
 
 }

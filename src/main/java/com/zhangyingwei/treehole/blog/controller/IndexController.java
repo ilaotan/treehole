@@ -74,8 +74,8 @@ public class IndexController {
                 .setTitle(article.getTitle())
                 .setDate(article.getDate())
                 .setCategories(article.getKind())
-                .setContent(article.getArticle())
-                .setIntroduction(article.getIntro())
+                .setContent(article.getArticleHtml())
+                .setIntroduction(article.getIntroHtml())
                 .setTags(article.getTags()==null?new String[0]:article.getTags().split(","))
                 .setUseCommont(article.getUsecommont())
         );
@@ -91,9 +91,9 @@ public class IndexController {
      * @throws TreeHoleException
      */
     private Article getArticleInfo(String subpath) throws TreeHoleException {
-        Article article = this.articleService.getArticleBySubPath(subpath);
+        Article article = this.articleService.getPostBySubPath(subpath);
         if(article == null){
-            article = this.articleService.getArticleById(subpath);
+            article = this.articleService.getPostById(subpath);
         }
         return article;
     }
@@ -147,7 +147,7 @@ public class IndexController {
      */
     public List<Article> getPosts() throws TreeHoleException {
         List<Article> posts = new ArrayList<Article>();
-        posts = this.articleService.getArticles();
+        posts = this.articleService.getPosts();
         return posts;
     }
 }

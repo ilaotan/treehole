@@ -297,7 +297,8 @@ public class TreeHoleUtils {
     public static Map<String,String> getGolbleStateDic(){
         return new HashMap<String, String>(){
             {
-                put("0", "正常");
+                put("0", "保存未发布");
+                put("1", "发布");
                 put("9", "已删除");
             }
         };
