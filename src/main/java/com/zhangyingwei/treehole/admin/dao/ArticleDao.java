@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Mapper
 public interface ArticleDao {
-    @Select("select a.id,a.title,a.subpath,a.tags,a.intro,a.article,k.name as kind,a.usecommont,a.flag,a.date from article as a left join kind k on a.kind = k.id order by a.date")
+    @Select("select a.id,a.title,a.subpath,a.tags,a.intro,a.article,k.name as kind,a.usecommont,a.flag,a.date from article as a left join kind k on a.kind = k.id order by a.date desc")
     List<Article> selectArticles() throws Exception;
 
     @Select("select * from article where flag = 0")
@@ -25,10 +25,14 @@ public interface ArticleDao {
     void insertArticle(@Param("article") Article article) throws Exception;
 
     @Select("select * from article where subpath=#{subpath}")
-    Article selectArticleBySubpath(@Param("subpath") String subpath);
+    Article selectArticleBySubpath(@Param("subpath") String subpath) throws Exception;
 
     @Select("select * from article where title=#{title}")
-    Article selectArticleByTitle(String title);
+    Article selectArticleByTitle(String title) throws Exception;
+
+    @Select("select * from article where id=#{id}")
+    Article selectArticleById(String id) throws Exception;
+
     @Select("select * from article where kind=#{id}")
-    List<Article> selectArticleByKind(String id);
+    List<Article> selectArticleByKind(String id) throws Exception;
 }

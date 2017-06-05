@@ -23,6 +23,9 @@ $(function(){
         getContext:function(){
             return this.model.value()
         },
+        getHtml: function(){
+            return this.model.markdown(this.getContext());
+        },
         getIntro: function (content) {
             if(this.hasIntro(content)){
                 return content.split(this.spliter)[0]
@@ -75,7 +78,8 @@ $(function(){
     $("#save").click(function () {
         var article = MD.getArticle();
         var form = $("#mdform");
-        $("#submitType").val("save")
+        $("#submitType").val("save");
+        MD.model.value(MD.getHtml());
         if(MD.validArticle(article)){
             form.submit();
         }
@@ -83,4 +87,7 @@ $(function(){
     if($("#error-msg").text()){
         layer.msg($("#error-msg").text());
     }
+    $("#save_publish").click(function(){
+        console.log(MD.getHtml());
+    })
 })

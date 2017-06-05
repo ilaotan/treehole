@@ -1,10 +1,10 @@
 
 <div class="banner">
   <div class="container">
-  	{% if page.categories != null %}
+  	<% if (page.categories != null){ %>
     	<a href="${ blog.url+ '/categories/'}#{{page.categories}}-ref">${page.categories}</a>	/
-    {% else %}
-    	{{ site.banner }}
-    {% endif %}
+    <% }else{ %>
+    	${ site.banner }
+    <% } %>
   </div>
 </div>

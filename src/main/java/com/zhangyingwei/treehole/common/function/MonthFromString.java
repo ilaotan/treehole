@@ -22,7 +22,7 @@ public class MonthFromString implements Function {
         SimpleDateFormat format = new SimpleDateFormat(patten);
         try {
             Date date = format.parse(timeStr);
-            return new SimpleDateFormat("MM").format(date).getBytes();
+            return new SimpleDateFormat("MM").format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }

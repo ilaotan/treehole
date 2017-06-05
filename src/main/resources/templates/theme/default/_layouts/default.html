@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-  <% var sourceBasePath = blog.url! + + '/theme/' + theme; %>
   <% include("../_includes/head.html",{sourceBasePath:sourceBasePath}){} %>
   <body class="index">
     <% include("../_includes/header.html",{sourceBasePath:sourceBasePath}){} %>
@@ -8,6 +7,3 @@
     <% if(page.title!=null){ %>
         <% include("../_includes/banner.html"){} %>
     <% } %>
-    <% include("../_includes/footer.html",{sourceBasePath:sourceBasePath}){} %>
-  </body>
-</html>

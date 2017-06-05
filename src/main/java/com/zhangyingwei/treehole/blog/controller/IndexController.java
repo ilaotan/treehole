@@ -59,6 +59,44 @@ public class IndexController {
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_INDEX);
     }
 
+    @GetMapping("/articles/{subpath}")
+    public String getArticle(Map<String,Object> model , @PathVariable("subpath") String subpath) throws TreeHoleException {
+        //查询文章信息
+        Article article = this.getArticleInfo(subpath);
+        //加载配置信息
+        model.put("site", this.getSiteConfig());
+        //加载博客信息
+        model.put("blog", this.getBlogInfo());
+        //加载主题信息
+        model.put("theme", this.getThemeInfo());
+        //加载page信息
+        model.put("page", this.getPageInfo()
+                .setTitle(article.getTitle())
+                .setDate(article.getDate())
+                .setCategories(article.getKind())
+                .setContent(article.getArticle())
+                .setIntroduction(article.getIntro())
+                .setTags(article.getTags()==null?new String[0]:article.getTags().split(","))
+                .setUseCommont(article.getUsecommont())
+        );
+        return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_ARTICLE);
+    }
+
+    /**
+     * 查询文章详细信息
+     * 1 如果根据subpath可以查询出来，就按照subpath查询
+     * 2 如果subpath查询不出来，就按照id查询
+     * @param subpath
+     * @return
+     * @throws TreeHoleException
+     */
+    private Article getArticleInfo(String subpath) throws TreeHoleException {
+        Article article = this.articleService.getArticleBySubPath(subpath);
+        if(article == null){
+            article = this.articleService.getArticleById(subpath);
+        }
+        return article;
+    }
 
     /**
      * 获取主题配置文件中的信息
@@ -99,7 +137,7 @@ public class IndexController {
      * 构造page信息
      * @return
      */
-    public Object getPageInfo() {
+    public BlogPage getPageInfo() {
         return new BlogPage();
     }
 

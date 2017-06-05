@@ -52,8 +52,12 @@ public class ArticleService {
      * @param subpath
      * @return
      */
-    public Article getArticleBySubPath(String subpath){
-        return this.articleDao.selectArticleBySubpath(subpath);
+    public Article getArticleBySubPath(String subpath) throws TreeHoleException {
+        try {
+            return this.articleDao.selectArticleBySubpath(subpath);
+        } catch (Exception e) {
+            throw new TreeHoleException("根据subpath查询文章错误",e);
+        }
     }
 
     /**
@@ -61,8 +65,26 @@ public class ArticleService {
      * @param title
      * @return
      */
-    public Article getArticleByTitle(String title){
-        return this.articleDao.selectArticleByTitle(title);
+    public Article getArticleByTitle(String title) throws TreeHoleException {
+        try {
+            return this.articleDao.selectArticleByTitle(title);
+        } catch (Exception e) {
+            throw new TreeHoleException("根据标题查询文章错误", e);
+        }
+    }
+
+    /**
+     * 根据id查询文章
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public Article getArticleById(String id) throws TreeHoleException {
+        try {
+            return this.articleDao.selectArticleById(id);
+        } catch (Exception e) {
+            throw new TreeHoleException("根据编号查询文章错误", e);
+        }
     }
 
     /**
