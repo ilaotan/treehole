@@ -10,11 +10,11 @@ import static org.junit.Assert.*;
 public class TreeHoleUtilsTest {
     @Test
     public void ipLocal() throws Exception {
-        System.out.println(TreeHoleUtils.ipLocal("0.0.0.0"));
+//        System.out.println(TreeHoleUtils.ipLocal("0.0.0.0"));
     }
 
     @Test
     public void systemInfo() throws Exception {
-        System.out.println(TreeHoleUtils.systemInfo());
+//        System.out.println(TreeHoleUtils.systemInfo());
     }
 }

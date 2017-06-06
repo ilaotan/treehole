@@ -46,7 +46,8 @@ public class FileUtils {
     }
 
     public static void main(String[] args) {
-        FileUtils.formatFileType("src/main/resources/templates/theme/default", ".ejs", ".html");
+        FileUtils.formatFileType("templates/theme/default", ".ejs", ".html");
+//        FileUtils.formatFileType("src/main/resources/templates/theme/default", ".ejs", ".html");
     }
 
     /**

@@ -11,16 +11,16 @@ import static org.junit.Assert.*;
 public class DesUtilsTest {
     @Test
     public void encrypt() throws Exception {
-        String text = "123456";
-        String result = DesUtils.encrypt(text, "treehole");
-        System.out.println(result);
+//        String text = "123456";
+//        String result = DesUtils.encrypt(text, "treehole");
+//        System.out.println(result);
     }
 
     @Test
     public void decrypt() throws Exception {
-        String text = "jIUT/MsyWiY=";
-        String result = DesUtils.decrypt(text, "treehole");
-        System.out.println(result);
+//        String text = "jIUT/MsyWiY=";
+//        String result = DesUtils.decrypt(text, "treehole");
+//        System.out.println(result);
     }
 
 }

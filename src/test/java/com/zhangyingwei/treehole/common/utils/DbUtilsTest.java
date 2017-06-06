@@ -14,26 +14,26 @@ import static org.junit.Assert.*;
 public class DbUtilsTest {
     @Test
     public void execute() throws Exception {
-        DbConf dbConf = new DbConf();
-        dbConf.setUrl("jdbc:sqlite:treehole.db");
-        Connection connection = DbUtils.getConnection(dbConf);
-        Assert.assertNotNull(connection);
+//        DbConf dbConf = new DbConf();
+//        dbConf.setUrl("jdbc:sqlite:treehole.db");
+//        Connection connection = DbUtils.getConnection(dbConf);
+//        Assert.assertNotNull(connection);
     }
 
     @Test
     public void sqliteValid() throws Exception {
-        String url = "jdbc:sqlite:treehole.db";
-        Boolean valid = DbUtils.sqliteValid(url);
-        System.out.println(valid);
+//        String url = "jdbc:sqlite:treehole.db";
+//        Boolean valid = DbUtils.sqliteValid(url);
+//        System.out.println(valid);
     }
 
     @Test
     public void mysqlValid() throws Exception {
-        String url = "jdbc:mysql://zhangyingwei.com:3306";
-        String username = "root";
-        String password = "723903129Bao";
-        boolean valid = DbUtils.mysqlValid(url, username, password);
-        System.out.println(valid);
+//        String url = "jdbc:mysql://zhangyingwei.com:3306";
+//        String username = "root";
+//        String password = "723903129Bao";
+//        boolean valid = DbUtils.mysqlValid(url, username, password);
+//        System.out.println(valid);
     }
 
 }

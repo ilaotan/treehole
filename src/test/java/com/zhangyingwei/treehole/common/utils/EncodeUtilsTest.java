@@ -10,8 +10,8 @@ import static org.junit.Assert.*;
 public class EncodeUtilsTest {
     @Test
     public void getMD5String() throws Exception {
-        String result = EncodeUtils.getMD5String("123456");
-        System.out.println(result);
+//        String result = EncodeUtils.getMD5String("123456");
+//        System.out.println(result);
     }
 
 }

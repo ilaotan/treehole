@@ -10,23 +10,23 @@ import static org.junit.Assert.*;
 public class PropertiesUtilsTest {
     @Test
     public void update() throws Exception {
-        PropertiesUtils.update("config.properties", "key", "haha");
+//        PropertiesUtils.update("config.properties", "key", "haha");
     }
 
     @Test
     public void createProperties() throws Exception {
-        PropertiesUtils.createProperties("config.properties","");
+//        PropertiesUtils.createProperties("config.properties","");
     }
 
     @Test
     public void test(){
-        label:for (int i = 0; i < 10; i++) {
-            System.out.println((Integer) i);
-            if(i == 2){
-                break label;
-
-            }
-        }
+//        label:for (int i = 0; i < 10; i++) {
+//            System.out.println((Integer) i);
+//            if(i == 2){
+//                break label;
+//
+//            }
+//        }
     }
 
 }

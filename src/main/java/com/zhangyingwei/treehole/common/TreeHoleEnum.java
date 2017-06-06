@@ -16,7 +16,8 @@ public enum TreeHoleEnum {
     THEME_BASEPATH("theme"),
     STATE_DIC_KEY("stateDic"),
     UPLOAD_FILE_BASEPATH("upload/"),
-    RES_IMG_DEFAULT("src/main/resources/static/images/default.jpg"),
+    RES_IMG_DEFAULT("static/images/default.jpg"),
+//    RES_IMG_DEFAULT("src/main/resources/static/images/default.jpg"),
     THEME_CONFIG("_config.yml");
 
     private String value;
