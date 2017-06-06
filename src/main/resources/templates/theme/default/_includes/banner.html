@@ -1,8 +1,10 @@
 
 <div class="banner">
   <div class="container">
-  	<% if (page.categories != null){ %>
-    	${page.categories}/
+  	<% if (page.tags != null){ %>
+        <% for(var tag in page.tags){ %>
+            <span class="tag">${tag}</span>
+        <% } %>
     <% }else{ %>
     	${ site.banner }
     <% } %>

@@ -34,3 +34,34 @@
 -->
   </ul>
 </div>
+
+<script>
+    /**
+     * 添加文章页面 目录
+     * 目前只添加了一级目录
+     */
+    $(function(){
+        function GenerateContentList(){
+            var article = $("article");
+            var h1 = article.find("h1");
+//            var h2 = article.find("h2");
+            var hArr = new Array();
+            $.each(h1, function () {
+                hArr.push(this);
+            });
+//            $.each(h2, function () {
+//                hArr.push(this);
+//            });
+            hArr.sort(function (a, b) {
+                var i = $(a).attr("id");
+                var j = $(b).attr("id");
+                return i-j;
+            });
+            var navigation = $("#navigation").find("ul");
+            $.each(hArr, function () {
+                navigation.prepend("<li><a href='#"+$(this).attr("id")+"'>"+$(this).text()+"</li></a>");
+            });
+        }
+        GenerateContentList();
+    })
+</script>

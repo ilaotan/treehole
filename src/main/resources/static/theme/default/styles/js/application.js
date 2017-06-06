@@ -97,7 +97,6 @@
     setTimeout(function () {
       $('.top').affix()
     }, 100);
-
   })
 
 }(jQuery)

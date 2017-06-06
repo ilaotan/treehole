@@ -1,3 +1,215 @@
-<div>
-    这里是评论
+<style>
+    #comments{
+        margin-top: 50px;
+    }
+    .edit label{
+        font-family: "黑体", Roboto, Arial, "Droid Sans", sans-serif;
+        font-size: 15px;
+        width: 50px;
+        color: rgba(96, 125, 139, 0.93);
+    }
+    .edit:after{display:block;clear:both;content:"";visibility:hidden;height:0}
+    .edit .item{
+        margin: 20px auto;
+    }
+    .edit .submit {
+        float: right;
+        margin-right: 30px;
+        border: 2px solid rgba(96, 125, 139, 0.45);
+        padding: 5px 10px;
+        -webkit-border-radius:5px;
+        -moz-border-radius:5px;
+        border-radius:5px;
+        outline:none;
+    }
+    .edit .submit:hover {
+        background-color: rgba(96, 125, 139, 0.75);
+        color: #fff;
+    }
+    .edit .submit:active {
+        background-color: #9E9E9E;
+        color: #fff;
+    }
+    .edit input{
+        width:90%;
+        border: 2px solid rgba(96, 125, 139, 0.45);
+        height: 30px;
+        -webkit-border-radius:5px;
+        -moz-border-radius:5px;
+        border-radius: 5px;
+        outline: none;
+        padding:5px;
+    }
+    .edit #textarea{
+        width:90%;
+        min-height: 100px;
+        border: 2px solid rgba(96, 125, 139, 0.45);
+        -webkit-border-radius:5px;
+        -moz-border-radius:5px;
+        border-radius: 5px;
+        outline: none;
+        padding:5px;
+        display: inline-block;
+    }
+    #comments #show{
+        margin-top: 50px;
+    }
+    #comments #show .item{
+        margin: 20px 0;
+        border-bottom: 1px solid rgba(158, 158, 158, 0.29);
+        padding: 10px 0;
+    }
+    #comments #show .item .item{
+        margin: 20px 0;
+        border-bottom: 0;
+        padding: 10px 0;
+    }
+    #comments #show .item .edit{
+        margin-top: 10px;
+        background-color: rgba(96, 125, 139, 0.1);
+        padding:20px;
+        border-radius: 5px;
+        border: 1px solid #9d9d9d;
+    }
+    #comments #show .item .edit #textarea{
+        background-color: #fff;
+    }
+    #comments #show .item img{
+        width:8%;
+        max-height: 60px;
+        border: 2px solid rgba(96, 125, 139, 0.45);
+        border-radius: 5px;
+        vertical-align:top;
+    }
+    #comments #show .item .content{
+        display: inline-block;
+        padding-left: 10px;
+        max-width: 90%;
+    }
+    #comments #show .item .content .head{
+
+    }
+    #comments #show .item .content .head .name{
+        color: #00aeef;
+        font-weight: bolder;
+    }
+    #comments #show .item .content .head .tag{
+        background-color: rgba(96, 125, 139,1);
+        margin: 0 5px;
+        color: #fff;
+        padding: 1px 5px;
+        border-radius: 3px;
+    }
+    #comments #show .item .content .head .time{
+        background-color: rgba(96, 125, 139,1);
+        margin: 0 5px;
+        color: #fff;
+        padding: 1px 5px;
+        border-radius: 3px;
+    }
+    #comments #show .item .content .body{
+        font-size:13px;
+        padding: 3px 0;
+    }
+</style>
+<div id="comments">
+    <div class="edit">
+        <div class="item">
+            <label>昵称 </label><input type="text" id="name" name="name">
+        </div>
+        <div class="item">
+            <label>邮箱 </label><input type="email" id="email" name="email">
+        </div>
+        <div class="item">
+            <label>网站 </label><input type="url" id="site" name="site">
+        </div>
+        <div class="item">
+            <label style="vertical-align:top;">内容 </label><div contentEditable="true" id="textarea" name="content"></div>
+        </div>
+        <div class="item">
+            <button class="submit">提交评论</button>
+        </div>
+    </div>
+    <div id="show">
+        <div class="item">
+            <img src="/theme/default/styles/images/freud.jpg"/>
+            <div class="content">
+                <div class="head"><span class="name">zhangsan</span><span class="tag">游客</span><span class="time">2017-00-00 00:00:00</span></div>
+                <div class="body">博主这篇文章写的有点水</div>
+                <div class="action">
+                    <a class="backclick" href="#">回复</a>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="/theme/default/styles/images/freud.jpg"/>
+            <div class="content">
+                <div class="head"><span class="name">lisi</span><span class="tag">游客</span><span class="time">2017-00-00 00:00:00</span></div>
+                <div class="body">很棒！！！</div>
+                <div class="action">
+                    <a class="backclick" href="#">回复</a>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="/theme/default/styles/images/freud.jpg"/>
+            <div class="content">
+                <div class="head"><span class="name">zhangsan@lisi</span><span class="tag">游客</span><span class="time">2017-00-00 00:00:00</span></div>
+                <div class="body">放屁，明明水的一比</div>
+                <div class="action">
+                    <a class="backclick" href="#">回复</a>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="/theme/default/styles/images/freud.jpg"/>
+            <div class="content">
+                <div class="head"><span class="name">lisi@zhangsan</span><span class="tag">游客</span><span class="time">2017-00-00 00:00:00</span></div>
+                <div class="body">你有本事你来写啊，sb</div>
+                <div class="action">
+                    <a class="backclick" href="#">回复</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<script>
+    $(function () {
+        var submitFun = function (){
+            var name = $(this).parent().parent().find("#name").val();
+            var email = $(this).parent().parent().find("#email").val();
+            var site = $(this).parent().parent().find("#site").val();
+            var content = $(this).parent().parent().find("#textarea").text();
+            var html = '<div class="item"><img src="/theme/default/styles/images/freud.jpg"/><div class="content"><div class="head"><span class="name">' + name + '</span><span class="tag">游客</span><span class="time">刚刚</span></div><div class="body">' + content + '</div><div class="action"><a onclick="window.backFun()" href="#">回复</a></div></div></div>';
+            $(html).hide().prependTo("#show").slideDown(300);
+            window.showComment.slideToggle(300);
+        }
+        $(".submit").click(submitFun);
+
+        var backFun = function () {
+//            var commdom = window.showComment;
+//            if (!commdom) {
+//                var dom = $(".edit").clone();
+//                dom.hide();
+//                commdom = window.showComment = dom;
+//            }
+//            var this_dom = $(this).parent().parent().parent().find(".edit");
+//            if (this_dom.length == 0) {
+//                commdom.slideUp(0);
+//                $(this).parent().parent().parent().append(commdom);
+//                $(".submit").unbind("click");
+//                $(".submit").click(submitFun);
+//            }
+//            commdom.slideToggle(300);
+            alert("回复个屁啊,功能还没做完");
+        };
+        window.backFun = function () {
+            backFun();
+        };
+
+        /**
+         * 回复
+         */
+        $(".backclick").click(backFun);
+    })
+</script>

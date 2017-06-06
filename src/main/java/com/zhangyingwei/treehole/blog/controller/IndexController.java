@@ -82,6 +82,21 @@ public class IndexController {
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_ARTICLE);
     }
 
+    @GetMapping("/categories/")
+    public String categories(Map<String, Object> model) throws TreeHoleException {
+        //加载配置信息
+        model.put("site", this.getSiteConfig());
+        //加载博客信息
+        model.put("blog", this.getBlogInfo());
+        //加载主题信息
+        model.put("theme", this.getThemeInfo());
+        //加载page信息
+        model.put("page", this.getPageInfo());
+        //加载文章信息
+        model.put("posts", this.getPosts());
+        return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_CATEGORIES);
+    }
+
     /**
      * 查询文章详细信息
      * 1 如果根据subpath可以查询出来，就按照subpath查询

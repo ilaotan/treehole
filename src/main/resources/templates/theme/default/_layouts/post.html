@@ -26,15 +26,15 @@ var sourceBasePath = blog.url! + + '/theme/' + theme;
         </div>
       </div>
       <div class="panel docs-content">
-        <article class="post-content">
+        <div class="post-content">
           <div class="wrapper">
               <% if(page.useCommont){ %>
                 <% include("../_includes/comments.html",{"page":page}){} %>
               <% }else{ %>
-                评论关闭
+              <span style="margin-top: 70px; text-align: center; font-size: 13px;color: #F44336; display: block">评论关闭</span>
               <% } %>
           </div>
-        </article>
+        </div>
       </div>
     </div>
   </div>
