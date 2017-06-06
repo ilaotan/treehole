@@ -5,6 +5,8 @@ package com.zhangyingwei.treehole.common;
  * 系统公用枚举参数
  */
 public enum TreeHoleEnum {
+//    RES_BASEPATH(""),
+    RES_BASEPATH("src/main/resources/"),
     INSTALL_LOCK("install.lock"),//安装检测文件
     CONF_INSTALL_SQL("install.sql"),
     DB_MYSQL_CLASS("com.mysql.jdbc.Driver"),
@@ -16,8 +18,7 @@ public enum TreeHoleEnum {
     THEME_BASEPATH("theme"),
     STATE_DIC_KEY("stateDic"),
     UPLOAD_FILE_BASEPATH("upload/"),
-    RES_IMG_DEFAULT("static/images/default.jpg"),
-//    RES_IMG_DEFAULT("src/main/resources/static/images/default.jpg"),
+    RES_IMG_DEFAULT(RES_BASEPATH.getValue()+"static/images/default.jpg"),
     THEME_CONFIG("_config.yml");
 
     private String value;

@@ -83,8 +83,8 @@ public class TreeHoleUtils {
      */
     private static List<String> readSql(String common) throws TreeHoleException {
         List<String> sqlList = new ArrayList<String>();
-        File sqlFile = new File(TreeHoleEnum.CONF_INSTALL_SQL.getValue());
-//        File sqlFile = new File("src/main/resources/" + TreeHoleEnum.CONF_INSTALL_SQL.getValue());
+//        File sqlFile = new File(TreeHoleEnum.CONF_INSTALL_SQL.getValue());
+        File sqlFile = new File(TreeHoleEnum.RES_BASEPATH.getValue() + TreeHoleEnum.CONF_INSTALL_SQL.getValue());
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(sqlFile));
@@ -241,10 +241,10 @@ public class TreeHoleUtils {
      */
     public static String ipLocal(String ip){
         if(!isIpv4(ip)){
-            return "我好想不认识你的IPv6";
+            return "我好像不认识你的IPv6";
         }
-        IPUtils.load("17monipdb.dat");
-//        IPUtils.load("src/main/resources/17monipdb.dat");
+//        IPUtils.load("17monipdb.dat");
+        IPUtils.load(TreeHoleEnum.RES_BASEPATH.getValue() + "17monipdb.dat");
         String[] res = IPUtils.find(ip);
         String result = "";
         for (String re : res) {
@@ -300,7 +300,7 @@ public class TreeHoleUtils {
         return new HashMap<String, String>(){
             {
                 put("0", "保存未发布");
-                put("1", "");
+                put("1", "已发布");
                 put("9", "已删除");
             }
         };

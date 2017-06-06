@@ -115,7 +115,7 @@ public class DbUtils {
         Connection connection = null;
         try {
             if (TreeHoleEnum.DB_SQLITE_CLASS.equals(DB_CLASS)) {
-                Class.forName(TreeHoleEnum.DB_MYSQL_CLASS.getValue());
+                Class.forName(TreeHoleEnum.DB_SQLITE_CLASS.getValue());
             }else if(TreeHoleEnum.DB_MYSQL_CLASS.equals(DB_CLASS)){
                 Class.forName(TreeHoleEnum.DB_MYSQL_CLASS.getValue());
             }

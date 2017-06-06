@@ -1,6 +1,7 @@
 package com.zhangyingwei.treehole.common.utils;
 
 
+import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.config.TreeHoleConfig;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import org.apache.commons.lang3.StringUtils;
@@ -46,8 +47,8 @@ public class FileUtils {
     }
 
     public static void main(String[] args) {
-        FileUtils.formatFileType("templates/theme/default", ".ejs", ".html");
-//        FileUtils.formatFileType("src/main/resources/templates/theme/default", ".ejs", ".html");
+//        FileUtils.formatFileType("templates/theme/default", ".ejs", ".html");
+        FileUtils.formatFileType(TreeHoleEnum.RES_BASEPATH.getValue()+"templates/theme/default", ".ejs", ".html");
     }
 
     /**
