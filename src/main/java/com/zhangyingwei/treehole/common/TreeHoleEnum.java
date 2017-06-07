@@ -19,7 +19,8 @@ public enum TreeHoleEnum {
     STATE_DIC_KEY("stateDic"),
     UPLOAD_FILE_BASEPATH("upload/"),
     RES_IMG_DEFAULT(RES_BASEPATH.getValue()+"static/images/default.jpg"),
-    THEME_CONFIG("_config.yml");
+    THEME_CONFIG("_config.yml"),
+    FEED_ENCODING("UTF-8");
 
     private String value;
 

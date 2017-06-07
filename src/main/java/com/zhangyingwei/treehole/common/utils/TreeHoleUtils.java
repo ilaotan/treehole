@@ -1,11 +1,14 @@
 package com.zhangyingwei.treehole.common.utils;
 
+import com.zhangyingwei.treehole.admin.model.Article;
 import com.zhangyingwei.treehole.admin.model.Menu;
 import com.zhangyingwei.treehole.admin.model.User;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
+import com.zhangyingwei.treehole.install.model.BlogConf;
 import com.zhangyingwei.treehole.install.model.DbConf;
 import org.apache.commons.lang3.StringUtils;
+import org.dom4j.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -361,5 +364,121 @@ public class TreeHoleUtils {
      */
     public static void deleteUploadFile(String path) {
         FileUtils.deleteFile(path);
+    }
+
+    /**
+     * 生成feed文件
+     * @return
+     */
+    public static String createFeed(BlogConf blog, List<Article> posts, Map<String,Object> site) throws TreeHoleException, IOException {
+        Document feed = createDocument();
+        Element root = createRootElement();
+        Element channel = createChannel(blog,posts,site);
+        root.add(channel);
+        feed.setRootElement(root);
+        return feed.asXML();
+    }
+
+    /**
+     * 创建 channel 节点
+     *
+     * @param blog
+     * @param posts
+     * @param site
+     * @return
+     */
+    private static Element createChannel(BlogConf blog, List<Article> posts, Map<String, Object> site) {
+        Date date = new Date();
+        Element channel = DocumentHelper.createElement("channel");
+        //title
+        Element title = DocumentHelper.createElement("title");
+        title.setText(blog.getName());
+        channel.add(title);
+        //description
+        Element description = DocumentHelper.createElement("description");
+        description.addCDATA(blog.getDesc());
+        channel.add(description);
+        //link
+        Element link = DocumentHelper.createElement("link");
+        link.setText(blog.getUrl());
+        channel.add(link);
+        //atom:link
+        Element atomLink = DocumentHelper.createElement("atom:link");
+        atomLink.addAttribute("href", blog.getUrl() + "/feed");
+        channel.add(atomLink);
+        //pubDate
+        Element pubDate = DocumentHelper.createElement("pubDate");
+        pubDate.setText(date.toString());
+        channel.add(pubDate);
+        //lastBuildDate
+        Element lastBuildDate = DocumentHelper.createElement("lastBuildDate");
+        lastBuildDate.setText(date.toString());
+        channel.add(lastBuildDate);
+        //generator
+        Element generator = DocumentHelper.createElement("generator");
+        generator.setText("TreeHole v0.0.1");
+        channel.add(generator);
+        //items
+        List<Element> items = createItems(blog, posts);
+        for (Element item : items) {
+            channel.add(item);
+        }
+        return channel;
+    }
+
+    private static List<Element> createItems(BlogConf blog, List<Article> posts) {
+        List<Element> items = new ArrayList<Element>();
+        for (Article post : posts) {
+            Element item = DocumentHelper.createElement("item");
+            Element title = DocumentHelper.createElement("title");
+            title.setText(post.getTitle());
+            Element description = DocumentHelper.createElement("description");
+            description.addCDATA(post.getArticleHtml());
+            Element pubDate = DocumentHelper.createElement("pubDate");
+            pubDate.setText(post.getDate());
+            Element link = DocumentHelper.createElement("link");
+            link.setText(blog.getUrl() + "/articles/" + post.getId());
+            Element guid = DocumentHelper.createElement("guid");
+            guid.setText(blog.getUrl() + "/articles/" + post.getId());
+            Element category = DocumentHelper.createElement("category");
+            category.setText(post.getKind());
+            String tags = post.getTags();
+            item.add(title);
+            item.add(description);
+            item.add(pubDate);
+            item.add(link);
+            item.add(guid);
+            item.add(category);
+            if(StringUtils.isNoneEmpty(tags)){
+                for (String tag : tags.split(",")) {
+                    Element tagEl = DocumentHelper.createElement("category");
+                    tagEl.setText(tag);
+                    item.add(tagEl);
+                }
+            }
+            items.add(item);
+        }
+        return items;
+    }
+
+    /**
+     * 创建 reed 文档对象
+     * @return
+     */
+    private static Document createDocument() {
+        Document doc = DocumentHelper.createDocument();
+        doc.setXMLEncoding(TreeHoleEnum.FEED_ENCODING.getValue());
+        return doc;
+    }
+
+    /**
+     * 创建reed根节点
+     * @return
+     */
+    private static Element createRootElement() {
+        Element element = DocumentHelper.createElement("rss");
+        element.addAttribute("version", "2.0");
+        element.addAttribute("xmlns:atom", "http://www.w3.org/2005/Atom");
+        return element;
     }
 }

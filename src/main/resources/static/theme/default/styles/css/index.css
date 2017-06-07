@@ -27,7 +27,7 @@ template {
   display: none;
 }
 html {
-  font-family: sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, 'Microsoft YaHei', sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -6105,6 +6105,7 @@ body {
   line-height: 1.42857143;
   color: #333333;
   background-color: #f7f7f7;
+    letter-spacing: 1px;
 }
 input,
 button,
@@ -6600,8 +6601,8 @@ h1,
 h2,
 h3 {
   position: relative;
-  padding-left: 60px;
-  margin-left: -60px;
+  /*padding-left: 60px;*/
+  margin-left: 0px;
 }
 h1 .anchor:hover,
 h2 .anchor:hover,
@@ -7130,4 +7131,23 @@ span.tag {
   -moz-border-radius:2px;
   border-radius:2px;
   color: #fff;
+}
+
+article h1{
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+article h2{
+    padding-bottom: 10px;
+}
+article p{
+    /*line-height: 25px;*/
+}
+article img {
+    display: block;
+    margin: 0 auto;
+}
+body{
+    line-height: 25px;
 }
