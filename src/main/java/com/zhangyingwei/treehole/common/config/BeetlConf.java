@@ -1,21 +1,21 @@
 package com.zhangyingwei.treehole.common.config;
 
-import com.zhangyingwei.treehole.TreeholeApplication;
 import com.zhangyingwei.treehole.common.function.DayFromString;
 import com.zhangyingwei.treehole.common.function.MonthFromString;
 import com.zhangyingwei.treehole.common.function.YearFromString;
 import org.beetl.core.Function;
-import org.beetl.core.GroupTemplate;
 import org.beetl.core.resource.ClasspathResourceLoader;
+import org.beetl.core.resource.WebAppResourceLoader;
 import org.beetl.ext.spring.BeetlGroupUtilConfiguration;
 import org.beetl.ext.spring.BeetlSpringViewResolver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternUtils;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -31,8 +31,17 @@ public class BeetlConf {
     public BeetlGroupUtilConfiguration getBeetlGroupUtilConfiguration() {
 
         BeetlGroupUtilConfiguration beetlGroupUtilConfiguration = new BeetlGroupUtilConfiguration();
-        ClasspathResourceLoader classpathResourceLoader = new ClasspathResourceLoader();
-        beetlGroupUtilConfiguration.setResourceLoader(classpathResourceLoader);
+        ResourcePatternResolver patternResolver = ResourcePatternUtils.getResourcePatternResolver(new DefaultResourceLoader());
+        try {
+            WebAppResourceLoader webAppResourceLoader = new WebAppResourceLoader(
+                    patternResolver.getResource("classpath:/src/main/resources/templates/").getFile().getPath()
+            );
+            beetlGroupUtilConfiguration.setResourceLoader(webAppResourceLoader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        ClasspathResourceLoader classpathResourceLoader = new ClasspathResourceLoader();
+//        beetlGroupUtilConfiguration.setResourceLoader(classpathResourceLoader);
         beetlGroupUtilConfiguration.setFunctions(new HashMap<String,Function>(){
             {
                 put("yearFromString", new YearFromString());
@@ -48,7 +57,8 @@ public class BeetlConf {
     @Bean(name = "beetlViewResolver")
     public BeetlSpringViewResolver getBeetlSpringViewResolver(@Qualifier("beetlConfig") BeetlGroupUtilConfiguration beetlGroupUtilConfiguration) {
         BeetlSpringViewResolver beetlSpringViewResolver = new BeetlSpringViewResolver();
-        beetlSpringViewResolver.setPrefix("templates/");
+//        beetlSpringViewResolver.setPrefix("templates/");
+        beetlSpringViewResolver.setPrefix("/");
         beetlSpringViewResolver.setSuffix(".html");
         beetlSpringViewResolver.setContentType("text/html;charset=UTF-8");
         beetlSpringViewResolver.setOrder(0);
