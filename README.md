@@ -20,3 +20,6 @@
     * 名称
     * 链接
     * 添加日期
+    
+    
+> mvn clean package assembly:single -Pprod -Dmaven.test.skip=true

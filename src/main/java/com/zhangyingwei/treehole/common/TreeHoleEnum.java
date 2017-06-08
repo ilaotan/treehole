@@ -5,7 +5,7 @@ package com.zhangyingwei.treehole.common;
  * 系统公用枚举参数
  */
 public enum TreeHoleEnum {
-    RES_BASEPATH(""),
+    RES_BASEPATH("resources/"),
 //    RES_BASEPATH("src/main/resources/"),
     INSTALL_LOCK("install.lock"),//安装检测文件
     CONF_INSTALL_SQL("install.sql"),

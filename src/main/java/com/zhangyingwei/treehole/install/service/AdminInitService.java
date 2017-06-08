@@ -1,5 +1,6 @@
 package com.zhangyingwei.treehole.install.service;
 
+import com.zhangyingwei.treehole.admin.model.User;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
 import com.zhangyingwei.treehole.install.dao.AdminInitDao;
@@ -19,6 +20,21 @@ public class AdminInitService implements IAdminInitService {
     private Logger logger = LoggerFactory.getLogger(AdminInitService.class);
     @Autowired
     private AdminInitDao adminInitDao;
+
+    @Override
+    public Boolean login(User user) throws TreeHoleException{
+        try {
+            User login = this.adminInitDao.selectOne(user);
+            if (login != null && login.getUsername() != null && login.getPassword() != null) {
+                return true;
+            }else{
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            throw new TreeHoleException("用户名或密码错误", e);
+        }
+    }
 
     @Override
     public void adminInit(AdminConf adminConf) throws TreeHoleException {

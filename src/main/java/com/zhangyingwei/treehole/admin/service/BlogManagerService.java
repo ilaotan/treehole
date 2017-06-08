@@ -28,7 +28,7 @@ public class BlogManagerService {
     private InstallInfoDao installInfoDao;
 
     public BlogConf getBlogConf() throws TreeHoleException{
-        BlogConf blogConf = null;
+        BlogConf blogConf = new BlogConf();
         try {
             blogConf = this.blogInfoDao.select();
             blogConf.setDesc(TreeHoleUtils.trans2Html(blogConf.getDesc()));

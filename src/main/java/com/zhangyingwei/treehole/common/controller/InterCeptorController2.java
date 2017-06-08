@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by zhangyw on 2017/5/8.
@@ -33,10 +36,21 @@ public class InterCeptorController2 {
         HttpServletRequest request = attributes.getRequest();
         HttpServletResponse response = attributes.getResponse();
         HttpSession session = request.getSession();
-        if(!TreeHoleUtils.isLogin(session)){
-            TreeHoleUtils.login(session);
-//            logger.info("没有登录");
-//            response.sendRedirect("/admin");
+        String uri = request.getRequestURI();
+        if(!TreeHoleUtils.isInstalled()){
+            response.sendRedirect("/install");
+        }else{
+            if(uri.startsWith("/install")){
+                logger.info("已经安装，不能再次安装");
+            }
+            response.sendRedirect("/");
+        }
+        if (uri.startsWith("/admin")) {
+            if (!TreeHoleUtils.isLogin(session)) {
+//            TreeHoleUtils.login(session);
+                logger.info("没有登录");
+                response.sendRedirect("/admin");
+            }
         }
         if (session.getAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue()) == null) {
             session.setAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue(),TreeHoleUtils.getGolbleStateDic());
