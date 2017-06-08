@@ -25,7 +25,7 @@ import java.util.Set;
 @Configuration
 public class InterCeptorController2 {
     private Logger logger = LoggerFactory.getLogger(InterCeptorController2.class);
-
+    
     @Pointcut("execution(public * com.zhangyingwei.treehole..*.controller.*.*(..))")
     public void controllerMethodPointcut(){}
 
