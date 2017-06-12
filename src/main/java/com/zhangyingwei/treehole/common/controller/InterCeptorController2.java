@@ -25,7 +25,7 @@ import java.util.Set;
 @Configuration
 public class InterCeptorController2 {
     private Logger logger = LoggerFactory.getLogger(InterCeptorController2.class);
-    
+
     @Pointcut("execution(public * com.zhangyingwei.treehole..*.controller.*.*(..))")
     public void controllerMethodPointcut(){}
 
@@ -50,10 +50,11 @@ public class InterCeptorController2 {
 //            TreeHoleUtils.login(session);
                 logger.info("没有登录");
                 response.sendRedirect("/admin");
+            }else{
+                if (session.getAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue()) == null) {
+                    session.setAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue(),TreeHoleUtils.getGolbleStateDic());
+                }
             }
-        }
-        if (session.getAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue()) == null) {
-            session.setAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue(),TreeHoleUtils.getGolbleStateDic());
         }
         // 记录下请求内容
         logger.info("URL : " + request.getRequestURL().toString());

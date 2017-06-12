@@ -25,7 +25,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% for (article in articles){ %>
+                <% for (article in articles!){ %>
                 <tr>
                     <th scope="row">${ articleLP.index! }</th>
                     <th hidden>${ article.id! }</th>
@@ -34,13 +34,15 @@
                     <td>${ article.subpath! }</td>
                     <td><span class="tag">${ article.kind! }</span></td>
                     <%
-                    article.tags = strutil.replace(article.tags,",","</span><span class='tag tag-org'>");
+                        if(strutil.length(article.tags)>0){
+                            article.tags = strutil.replace(article.tags,",","</span><span class='tag tag-org'>");
                             article.tags = "<span class='tag tag-org'>"+article.tags+"</span>";
-                        %>
+                        }
+                    %>
                         <td>${ article.tags! }</td>
                         <%
                             var commClass = "fa-close";
-                            if(article.usecommont == "on"){
+                            if(article.usecommont=="on"){
                                 commClass = "fa-check";
                             }
                         %>

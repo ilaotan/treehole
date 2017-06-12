@@ -1,12 +1,16 @@
-
 <div class="banner">
   <div class="container">
-  	<% if (page.tags != null){ %>
+    <% var showBanner = true; %>
+  	<% if (page.tags != null){%>
         <% for(var tag in page.tags){ %>
-            <span class="tag">${tag}</span>
+            <% if(strutil.length(tag)>0){ %>
+                <span class="tag">${tag}</span>
+                <% showBanner = false; %>
+            <% } %>
         <% } %>
-    <% }else{ %>
-    	${ site.banner }
+    <% } %>
+    <% if(showBanner){ %>
+        ${ site.banner }
     <% } %>
   </div>
 </div>

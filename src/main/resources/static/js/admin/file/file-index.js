@@ -1,7 +1,14 @@
+Dropzone.autoDiscover = false;
 $(function () {
     var fileContainer = $("#file_container");
     var table = fileContainer.find("table");
     var refreshBtn = fileContainer.find(".refresh-link");
+
+    $("#fileUpload").dropzone({
+        success: function() {
+            getFileInfos();
+        }
+    });
 
     refreshBtn.click(function () {
         getFileInfos();

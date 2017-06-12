@@ -17,13 +17,14 @@
         margin-bottom: 0 !important;
     }
 </style>
-<h3>新建文章</h3>
+<h3>编辑文章</h3>
 <div class="x_panel">
     <div class="x_content">
         <div class="th-markdown" id="article">
             <span hidden id="error-msg">${msg!}</span>
-            <form id="mdform" method="post" action="/admin/articles/publish">
+            <form id="mdform" method="post" action="/admin/articles">
                 <input hidden type="text" name="type" id="submitType">
+                <input hidden type="text" name="id" value="${article.id}">
                 <div id="a-top">
                     <div class="row">
                         <div class="col-md-4">

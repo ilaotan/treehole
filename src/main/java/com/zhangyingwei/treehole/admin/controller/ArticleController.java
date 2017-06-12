@@ -83,7 +83,21 @@ public class ArticleController {
         Article article = this.articleService.getArticleById(id);
         model.put("article", article);
         model.put("kinds", this.articleService.getKinds());
-        return Pages.ADMIN_ARTICLES_PUBLISH;
+        return Pages.ADMIN_ARTICLES_EDIT;
+    }
+
+    @PostMapping
+    public String saveEditArticle(Map<String, Object> model, @Valid Article article) throws TreeHoleException {
+        try {
+            this.articleService.editArticle(article);
+        } catch (TreeHoleException e) {
+            logger.error(e.getLocalizedMessage());
+            model.put("article", article);
+            model.put("msg", e.getLocalizedMessage());
+            model.put("kinds", this.articleService.getKinds());
+            return Pages.ADMIN_ARTICLES_EDIT;
+        }
+        return "redirect:/admin/articles/history";
     }
 
     /**

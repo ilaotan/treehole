@@ -106,8 +106,14 @@ public class Article {
         }
     }
 
+    /**
+     * 经测试 如果不勾选的话，表单提交不会有这个字段
+     * 如果勾选的话就会有这个字段
+     * 所以这里暂时这么写
+     * @return
+     */
     public String getUsecommont() {
-        return usecommont;
+        return "on".equals(this.usecommont) ? "on" : "off";
     }
 
     public void setUsecommont(String usecommont) {

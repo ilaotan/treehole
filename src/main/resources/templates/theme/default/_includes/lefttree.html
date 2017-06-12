@@ -56,9 +56,9 @@
                 var i = $(a).attr("id");
                 var j = $(b).attr("id");
                 return i-j;
-            }).reverse();
+            });
             var navigation = $("#navigation").find("ul");
-            $.each(hArr, function () {
+            $.each(hArr.reverse(), function () {
                 navigation.prepend("<li><a href='#"+$(this).attr("id")+"'>"+$(this).text()+"</li></a>");
             });
         }

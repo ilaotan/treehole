@@ -6,6 +6,8 @@ import com.zhangyingwei.treehole.admin.model.Article;
 import com.zhangyingwei.treehole.admin.model.Kind;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.List;
  */
 @Service
 public class ArticleService {
+    private Logger logger = LoggerFactory.getLogger(ArticleService.class);
     @Autowired
     private KindDao kindDao;
     @Autowired
@@ -178,6 +181,19 @@ public class ArticleService {
             }
         }catch (Exception e){
             throw new TreeHoleException("删除文章错误", e);
+        }
+    }
+
+    /**
+     * 编辑文章
+     * @param article
+     */
+    public void editArticle(Article article) throws TreeHoleException {
+        try {
+            this.articleDao.updateArticleById(article);
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            throw new TreeHoleException("根据id编辑文章错误",e);
         }
     }
 }
