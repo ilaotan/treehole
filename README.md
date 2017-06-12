@@ -23,3 +23,7 @@
     
     
 > mvn clean package assembly:single -Pprod -Dmaven.test.skip=true
+
+## 2017-06-12
+
+### 基本上完成一大半了，现在可以出一个初级的版本部署运行了
