@@ -34,13 +34,7 @@ public class InstallController {
     private AdminInitService adminInitService;
     @RequestMapping
     public String page(Map<String,Object> model){
-        Boolean installed = TreeHoleUtils.isInstalled();
-        try {
-            logger.info("mark as install");
-            TreeHoleUtils.markAsInstall();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        Boolean installed = TreeHoleUtils.isInstalled();
         return "install";
     }
 
@@ -100,7 +94,9 @@ public class InstallController {
     public Map initAdmin(@Valid AdminConf adminConf) throws TreeHoleException {
         try {
             this.adminInitService.adminInit(adminConf);
-        } catch (TreeHoleException e) {
+            TreeHoleUtils.markAsInstall();
+            logger.info("mark as install");
+        } catch (Exception e) {
             e.printStackTrace();
             throw new TreeHoleException(e.getMessage());
         }

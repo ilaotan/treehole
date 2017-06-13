@@ -38,11 +38,13 @@ public class InterCeptorController2 {
         HttpSession session = request.getSession();
         String uri = request.getRequestURI();
         if(uri.startsWith("/install")){
-            if(!TreeHoleUtils.isInstalled()){
-                response.sendRedirect("/install");
-            }else{
+            if(TreeHoleUtils.isInstalled()){
                 logger.info("已经安装，不能再次安装");
                 response.sendRedirect("/");
+            }
+        }else{
+            if(!TreeHoleUtils.isInstalled()){
+                response.sendRedirect("/install");
             }
         }
         if (uri.startsWith("/admin")) {
