@@ -14,6 +14,12 @@ TreeHole 或者叫 THole ，是一个简易安装的博客系统。
 
 ### 下载程序
 首先 [下载](http://orgr5bpmh.bkt.clouddn.com/treehole-0.0.1-SNAPSHOT.zip) 官方安装包。
+
+---
+java8: [下载](http://orgr5bpmh.bkt.clouddn.com/treehole-0.0.1-SNAPSHOT.zip)
+java7: [下载](http://orgr5bpmh.bkt.clouddn.com/treehole-0.0.1-SNAPSHOT-jdk7.zip)
+---
+
 然后解压，解压后的目录文件如下：
 ~~~
 treehole-0.0.1-SNAPSHOT
