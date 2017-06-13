@@ -1,29 +1,33 @@
 # treehole[树洞]
 
-## 2017-04-25
-### 完善了install页面
-### 实现了
-* 安装时声称install.lock标识文件
-* 安装时第一步验证数据库可用性
+TreeHole 或者叫 THole ，是一个简易安装的博客系统。 
 
-## 2017-05-08  下一步设想
-### 博客基础信息页
-* 用户信息
-    * 用户名 
-    * 密码 
-    * 邮箱
-* 安装信息
-    * 安装日期
-    * 博客版本
-    * 系统型号
-* 友链信息
-    * 名称
-    * 链接
-    * 添加日期
-    
-    
-> mvn clean package assembly:single -Pprod -Dmaven.test.skip=true
+## 本博客拥有以下几个特点
 
-## 2017-06-12
+1. 非静态博客，拥有自己的后台。只要有电脑的地方就可以写博客。[√]
+2. 官方适配jekyll主题，可以随意适配自己喜欢的主题。 [部分]
+3. 详细的来访统计系统，告别站长平台。 [×]
 
-### 基本上完成一大半了，现在可以出一个初级的版本部署运行了
+## 使用指南
+
+1. 安装
+
+### 下载程序
+首先[下载](http://orgr5bpmh.bkt.clouddn.com/treehole-0.0.1-SNAPSHOT.zip)官方安装包。
+然后解压，解压后的目录文件如下：
+~~~
+treehole-0.0.1-SNAPSHOT
+ |-lib
+ |-resources
+ |-treehole-0.0.1-SNAPSHOT.jar
+~~~
+
+### 启动程序
+进入到 treehole-0.0.1-SNAPSHOT 目录，执行如下命令
+> java -jar treehole-0.0.1-SNAPSHOT.jar
+
+### 安装程序
+在浏览器地址栏输入 http://ip:4000/install
+
+
+
