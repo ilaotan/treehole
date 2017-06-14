@@ -1,5 +1,8 @@
 package com.zhangyingwei.treehole.admin.log;
 
+import com.zhangyingwei.treehole.admin.log.executer.DefaultLogExecuter;
+import com.zhangyingwei.treehole.admin.log.executer.LogExecuter;
+import com.zhangyingwei.treehole.admin.log.model.LogModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,15 +16,20 @@ public class LogTask implements Runnable {
 
     private LogQueue queue;
 
+    private LogExecuter defaultLogExecuter;
+
     public LogTask(LogQueue queue) {
         this.queue = queue;
+        this.defaultLogExecuter = new DefaultLogExecuter();
     }
 
     @Override
     public void run() {
         while(true){
             try {
-                this.queue.take();
+                LogModel log = this.queue.take();
+                this.defaultLogExecuter.execute(log);
+                logger.info(log.toString());
             } catch (InterruptedException e) {
                 logger.info(e.getLocalizedMessage());
             }
