@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -23,6 +24,7 @@ import java.util.Set;
  */
 @Aspect
 @Configuration
+@Scope("prototype")
 public class InterCeptorController2 {
     private Logger logger = LoggerFactory.getLogger(InterCeptorController2.class);
 
@@ -37,21 +39,15 @@ public class InterCeptorController2 {
         HttpServletResponse response = attributes.getResponse();
         HttpSession session = request.getSession();
         String uri = request.getRequestURI();
-        if(uri.startsWith("/install")){
+        if(uri.startsWith("/install")) {
             if(TreeHoleUtils.isInstalled()){
                 logger.info("已经安装，不能再次安装");
-                response.sendRedirect("/");
-            }
-        }else{
-            if(!TreeHoleUtils.isInstalled()){
-                response.sendRedirect("/install");
-            }
-        }
-        if (uri.startsWith("/admin")) {
-            if (!TreeHoleUtils.isLogin(session)) {
-//            TreeHoleUtils.login(session);
-                logger.info("没有登录");
                 response.sendRedirect("/admin");
+            }
+        }else {
+            if(!TreeHoleUtils.isInstalled()){
+                logger.info("没有安装");
+                response.sendRedirect("/install");
             }else{
                 if (session.getAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue()) == null) {
                     session.setAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue(),TreeHoleUtils.getGolbleStateDic());

@@ -9,6 +9,7 @@ import com.zhangyingwei.treehole.install.service.AdminInitService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,7 @@ import java.util.Map;
  * @desc: 登录
  */
 @Controller
+@Scope("prototype")
 @RequestMapping("/admin")
 public class LoginHandler {
     private Logger logger = LoggerFactory.getLogger(LoginHandler.class);
@@ -41,8 +43,14 @@ public class LoginHandler {
             return Pages.ADMIN_INDEX;
         } else {
             Cookie[] cookie = request.getCookies();
-            return Pages.ADMIN_LOGIN;
+            return "redirect:/admin/login";
         }
+    }
+
+    @GetMapping("/login")
+    public String loginIndex(HttpServletRequest request) {
+        Cookie[] cookie = request.getCookies();
+        return Pages.ADMIN_LOGIN;
     }
 
     @PostMapping("/login")

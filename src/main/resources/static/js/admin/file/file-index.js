@@ -39,13 +39,13 @@ $(function () {
     }
 
     function bulidTable(files) {
-        var url = window.location.href;
+        var url = window.location.origin;
         var tbody = fileContainer.find("table tbody")
         //清空表格中的数据
         tbody.html("")
         var bodyHtml = "";
         $.each(files, function () {
-            var uurl = url + "/" + this.alias;
+            var uurl = url + "/files/" + this.alias;
             bodyHtml += "<tr>";
             bodyHtml += "<td>" + this.id + "</td>";
             bodyHtml += "<td>" + this.name + "</td>";

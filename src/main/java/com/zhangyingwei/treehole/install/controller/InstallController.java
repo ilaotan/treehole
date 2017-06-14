@@ -12,11 +12,9 @@ import com.zhangyingwei.treehole.install.service.AdminInitService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -27,12 +25,13 @@ import java.util.Map;
  * Created by zhangyw on 2017/4/21.
  */
 @Controller
+@Scope("prototype")
 @RequestMapping("/install")
 public class InstallController {
     private Logger logger = LoggerFactory.getLogger(InstallController.class);
     @Autowired
     private AdminInitService adminInitService;
-    @RequestMapping
+    @GetMapping
     public String page(Map<String,Object> model){
 //        Boolean installed = TreeHoleUtils.isInstalled();
         return "install";
