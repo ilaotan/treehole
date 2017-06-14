@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class TreeHoleUtilsTest {
     @Test
     public void ipLocal() throws Exception {
-//        System.out.println(TreeHoleUtils.ipLocal("0.0.0.0"));
+        System.out.println(TreeHoleUtils.ipLocal("119.2.4.202"));
     }
 
     @Test

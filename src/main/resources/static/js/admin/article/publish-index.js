@@ -1,5 +1,9 @@
 $(function(){
 
+    var switchery = new Switchery($(".js-switch")[0], {
+        color: '#26B99A'
+    });
+
     /**
      * markdown编辑器
      * @type {{model: string, spliter: string, make: make, init: init, getContext: getContext, getIntro: getIntro, hasIntro: hasIntro, formateArticle: formateArticle, getArticle: getArticle, validArticle: validArticle}}

@@ -3,7 +3,7 @@
         padding: 10px;
     }
     #blog-desc{
-        font-size: 15px;
+        font-size: 13px;
         border:0;
         background-color: #fff;
     }
@@ -20,17 +20,17 @@
                 <ul class="list-unstyled user_data">
                     <li class="row">
                         <div class="col-md-3">名称：</div>
-                        <div class="col-md-9">${bloginfo.name}</div>
+                        <div class="col-md-9" id="blog-name">${bloginfo.name}</div>
                     </li>
                     <li class="row">
                         <a href="${bloginfo.url!}" target="_blank">
                             <div class="col-md-3">地址:</div>
-                            <div class="col-md-9">${bloginfo.url!}</div>
+                            <div class="col-md-9" id="blog-url">${bloginfo.url!}</div>
                         </a>
                     </li>
                     <li class="row">
                         <div class="col-md-3">简介:</div>
-                        <div class="col-md-9">${bloginfo.desc!}</div>
+                        <div class="col-md-9" id="blog-desc">${bloginfo.desc!}</div>
                     </li>
                 </ul>
                 <a class="btn btn-success" id="edit-profile"><i class="fa fa-edit m-right-xs"></i>修改</a>
@@ -91,19 +91,19 @@
     <div class="row">
         <div class="col-md-2">博客名称</div>
         <div class="col-md-10">
-            <input type="text" class="form-control" id="name" placeholder="博客名称">
+            <input type="text" class="form-control" id="blogname" placeholder="博客名称" >
         </div>
     </div>
     <div class="row">
         <div class="col-md-2">博客地址</div>
         <div class="col-md-10">
-            <input type="text" class="form-control" id="url" placeholder="博客地址">
+            <input type="text" class="form-control" id="blogurl" placeholder="博客地址" >
         </div>
     </div>
     <div class="row">
         <div class="col-md-2">博客简介</div>
         <div class="col-md-10">
-            <textarea class="form-control" id="desc" placeholder="博客简介"></textarea>
+            <textarea class="form-control" id="blogdesc" placeholder="博客简介"></textarea>
         </div>
     </div>
 </div>

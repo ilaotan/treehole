@@ -14,10 +14,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by zhangyw on 2017/5/8.
@@ -52,6 +48,9 @@ public class InterCeptorController2 {
                 if (session.getAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue()) == null) {
                     session.setAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue(),TreeHoleUtils.getGolbleStateDic());
                 }
+                if(uri.startsWith("/admin") && !TreeHoleUtils.isLogin(session)){
+                    response.sendRedirect("/admin/login");
+                }
             }
         }
         // 记录下请求内容
@@ -64,5 +63,11 @@ public class InterCeptorController2 {
     public void doAfter(JoinPoint joinPoint) throws Throwable {
         // 处理完请求，返回内容
 //        logger.info("method:" + joinPoint.getThis());
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        HttpServletResponse response = attributes.getResponse();
+        HttpSession session = request.getSession();
+        String uri = request.getRequestURI();
+
     }
 }

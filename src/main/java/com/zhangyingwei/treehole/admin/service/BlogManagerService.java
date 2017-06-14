@@ -47,4 +47,13 @@ public class BlogManagerService {
         }
         return installConf;
     }
+
+    public void updateBlogInfo(BlogConf blogConf) throws TreeHoleException{
+        try {
+            this.blogInfoDao.updateBlogInfo(blogConf);
+        } catch (Exception e) {
+            logger.error("更新博客信息错误");
+            throw new TreeHoleException("更新基础信息错误", e);
+        }
+    }
 }

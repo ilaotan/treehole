@@ -1,6 +1,7 @@
 package com.zhangyingwei.treehole.admin.controller;
 
 import com.zhangyingwei.treehole.admin.service.BlogManagerService;
+import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.Pages;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.install.model.BlogConf;
@@ -9,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -27,12 +28,20 @@ public class BlogManageController {
     private BlogManagerService blogManagerService;
 
     @GetMapping("/basic")
-    public String indexBasicInfoManage(Map<String,Object> model) throws TreeHoleException {
+    public String indexBasicInfoManage(Map<String, Object> model) throws TreeHoleException {
         BlogConf blogConf = this.blogManagerService.getBlogConf();
         InstallConf installConf = this.blogManagerService.getInstallinfo();
         model.put("bloginfo", blogConf);
         model.put("installinfo", installConf);
         return Pages.ADMIN_BLOG_BASIC;
     }
+
+    @PutMapping("/basic")
+    @ResponseBody
+    public Map<String, Object> editBlogInfo(@Valid BlogConf blogConf) throws TreeHoleException{
+        this.blogManagerService.updateBlogInfo(blogConf);
+        return Ajax.success("修改基础信息成功");
+    }
+
 
 }
