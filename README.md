@@ -23,4 +23,6 @@ TreeHole 或者叫 THole ，是一个简易安装的博客系统。
 ### 安装程序
 [安装使用指南](http://blog.zhangyingwei.com/articles/4)
 
+这个版本是最初加上日志收集器的版本
+
 
