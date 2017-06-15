@@ -3,6 +3,7 @@ package com.zhangyingwei.treehole.admin.controller;
 import com.zhangyingwei.treehole.admin.model.FileRes;
 import com.zhangyingwei.treehole.admin.service.FileManagerService;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
+import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class FileClientController {
     @Autowired
     private FileManagerService fileManagerService;
     @GetMapping("/{fileAlias}")
+    @TreeHoleAtcion("获取文件")
     public void downLoad(@PathVariable("fileAlias") String fileAlias, HttpServletResponse response){
         FileRes fileRes = null;
         File file = null;

@@ -3,6 +3,7 @@ package com.zhangyingwei.treehole.admin.controller;
 import com.zhangyingwei.treehole.admin.service.BlogManagerService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.Pages;
+import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.install.model.BlogConf;
 import com.zhangyingwei.treehole.install.model.InstallConf;
@@ -28,6 +29,7 @@ public class BlogManageController {
     private BlogManagerService blogManagerService;
 
     @GetMapping("/basic")
+    @TreeHoleAtcion("打开基础信息页面")
     public String indexBasicInfoManage(Map<String, Object> model) throws TreeHoleException {
         BlogConf blogConf = this.blogManagerService.getBlogConf();
         InstallConf installConf = this.blogManagerService.getInstallinfo();
@@ -38,6 +40,7 @@ public class BlogManageController {
 
     @PutMapping("/basic")
     @ResponseBody
+    @TreeHoleAtcion("修改博客基础信息")
     public Map<String, Object> editBlogInfo(@Valid BlogConf blogConf) throws TreeHoleException{
         this.blogManagerService.updateBlogInfo(blogConf);
         return Ajax.success("修改基础信息成功");

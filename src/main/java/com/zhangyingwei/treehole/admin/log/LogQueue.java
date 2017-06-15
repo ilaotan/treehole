@@ -1,21 +1,22 @@
 package com.zhangyingwei.treehole.admin.log;
 
 import com.zhangyingwei.treehole.admin.log.model.LogModel;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * Created by zhangyw on 2017/6/14.
  */
+@Component
 public class LogQueue {
     private ArrayBlockingQueue<LogModel> queue;
 
     /**
      * 初始化队列
-     * @param capacity
      */
-    public LogQueue(int capacity) {
-        this.queue = new ArrayBlockingQueue(capacity);
+    public LogQueue() {
+        this.queue = new ArrayBlockingQueue(1024);
     }
 
     /**

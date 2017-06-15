@@ -5,6 +5,7 @@ import com.zhangyingwei.treehole.admin.model.Kind;
 import com.zhangyingwei.treehole.admin.service.ArticleService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.Pages;
+import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,7 @@ public class ArticleController {
      * @return
      */
     @GetMapping("/publish")
+    @TreeHoleAtcion("打开新建文章页面")
     public String indexPublish(Map<String,Object> model) throws TreeHoleException {
         List<Kind> kinds = this.articleService.getKinds();
         model.put("kinds", kinds);
@@ -46,6 +48,7 @@ public class ArticleController {
      * @return
      */
     @PostMapping("/publish")
+    @TreeHoleAtcion("发布一篇文章")
     public String publish(Map<String, Object> model, @Valid Article article) throws TreeHoleException {
         try {
             this.articleService.addArticle(article);
@@ -67,6 +70,7 @@ public class ArticleController {
      */
     @PutMapping("/publish/{id}")
     @ResponseBody
+    @TreeHoleAtcion("修改文章状态为发布")
     public Map publish(Map<String, Object> model, @PathVariable("id") String id) throws TreeHoleException {
         this.articleService.addPublishArticle(id);
         return Ajax.success("发布成功");
@@ -74,11 +78,11 @@ public class ArticleController {
 
     /**
      * 修改文章
-     * TODO这里目前是个bug，不能跟新建文章用一个页面，随后再想想吧
      * @param model
      * @return
      */
     @GetMapping("/{id}")
+    @TreeHoleAtcion("打开修改文章页面")
     public String editArticle(Map<String, Object> model, @PathVariable("id") String id) throws TreeHoleException {
         Article article = this.articleService.getArticleById(id);
         model.put("article", article);
@@ -86,7 +90,15 @@ public class ArticleController {
         return Pages.ADMIN_ARTICLES_EDIT;
     }
 
+    /**
+     * 保存修改文章结果
+     * @param model
+     * @param article
+     * @return
+     * @throws TreeHoleException
+     */
     @PostMapping
+    @TreeHoleAtcion("保存修改文章结果")
     public String saveEditArticle(Map<String, Object> model, @Valid Article article) throws TreeHoleException {
         try {
             this.articleService.editArticle(article);
@@ -107,6 +119,7 @@ public class ArticleController {
      */
     @DeleteMapping("/{id}")
     @ResponseBody
+    @TreeHoleAtcion("删除文章")
     public Map delete(Map<String, Object> model, @PathVariable("id") String id,String state) throws TreeHoleException {
         if("state".equals(state)){
             this.articleService.deleteArticle(id,true);
@@ -123,6 +136,7 @@ public class ArticleController {
      * @return
      */
     @GetMapping("/history")
+    @TreeHoleAtcion("打开历史文章管理页面")
     public String indexHisroty(Map<String,Object> model) throws TreeHoleException {
         List<Article> articles = this.articleService.getArticles();
         model.put("articles", articles);

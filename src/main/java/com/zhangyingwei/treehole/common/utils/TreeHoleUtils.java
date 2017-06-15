@@ -244,9 +244,8 @@ public class TreeHoleUtils {
      */
     public static String ipLocal(String ip){
         if(!isIpv4(ip)){
-            return "我好像不认识你的IPv6";
+            return "";
         }
-//        IPUtils.load("17monipdb.dat");
         IPUtils.load(TreeHoleEnum.RES_BASEPATH.getValue() + "17monipdb.dat");
         String[] res = IPUtils.find(ip);
         String result = "";

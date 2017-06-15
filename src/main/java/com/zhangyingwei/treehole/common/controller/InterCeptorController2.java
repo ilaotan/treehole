@@ -1,11 +1,18 @@
 package com.zhangyingwei.treehole.common.controller;
 
+import com.zhangyingwei.treehole.admin.log.LogHandler;
+import com.zhangyingwei.treehole.admin.log.model.LogModel;
+import com.zhangyingwei.treehole.common.ApplicationContextProvider;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
+import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
+import com.zhangyingwei.treehole.common.utils.DateUtils;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
+import org.springframework.aop.framework.ReflectiveMethodInvocation;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -14,6 +21,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * Created by zhangyw on 2017/5/8.
@@ -23,6 +33,8 @@ import javax.servlet.http.HttpSession;
 @Scope("prototype")
 public class InterCeptorController2 {
     private Logger logger = LoggerFactory.getLogger(InterCeptorController2.class);
+
+    private LogHandler logHandler = ApplicationContextProvider.getBean("logHandler", LogHandler.class);
 
     @Pointcut("execution(public * com.zhangyingwei.treehole..*.controller.*.*(..))")
     public void controllerMethodPointcut(){}
@@ -69,5 +81,31 @@ public class InterCeptorController2 {
         HttpSession session = request.getSession();
         String uri = request.getRequestURI();
 
+        LogModel log = new LogModel();
+        log.setIp(request.getLocalAddr());
+        log.setUrl(request.getRequestURL().toString());
+        log.setUri(uri);
+        log.setAgent(request.getHeader("User-Agent"));
+        log.setReferer(request.getHeader("Referer"));
+        log.setTimestamp(DateUtils.getTimeStamp());
+        log.setReqType(request.getMethod());
+        log.setAction(this.getAction(joinPoint));
+        this.logHandler.produceLog(log);
+    }
+
+    private String getAction(JoinPoint joinPoint) throws NoSuchFieldException, IllegalAccessException {
+        MethodInvocationProceedingJoinPoint methodPoint = (MethodInvocationProceedingJoinPoint)joinPoint;
+        Annotation[] aaa = methodPoint.getClass().getAnnotations();
+        Field[] fs = methodPoint.getClass().getDeclaredFields();
+        Field proxy = methodPoint.getClass().getDeclaredField("methodInvocation");
+        proxy.setAccessible(true);
+        ReflectiveMethodInvocation j = (ReflectiveMethodInvocation) proxy.get(methodPoint);
+        Method method = j.getMethod();
+        TreeHoleAtcion annotation = method.getAnnotation(TreeHoleAtcion.class);
+        if(annotation!=null){
+            return annotation.value();
+        }else{
+            return "未识别";
+        }
     }
 }

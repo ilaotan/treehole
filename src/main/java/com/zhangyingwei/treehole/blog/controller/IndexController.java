@@ -6,6 +6,7 @@ import com.zhangyingwei.treehole.admin.service.BlogManagerService;
 import com.zhangyingwei.treehole.blog.model.BlogPage;
 import com.zhangyingwei.treehole.common.Pages;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
+import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import com.zhangyingwei.treehole.common.config.TreeHoleConfig;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.utils.TreeHoleConfigUtils;
@@ -45,6 +46,7 @@ public class IndexController {
     }
 
     @GetMapping("/articles")
+    @TreeHoleAtcion("打开博客首页")
     public String indexArticles(Map<String, Object> model) throws TreeHoleException {
         //加载配置信息
         model.put("site", this.getSiteConfig());
@@ -60,6 +62,7 @@ public class IndexController {
     }
 
     @GetMapping("/articles/{subpath}")
+    @TreeHoleAtcion("打开文章")
     public String getArticle(Map<String,Object> model , @PathVariable("subpath") String subpath) throws TreeHoleException {
         //查询文章信息
         Article article = this.getArticleInfo(subpath);
@@ -83,6 +86,7 @@ public class IndexController {
     }
 
     @GetMapping("/categories/")
+    @TreeHoleAtcion("按分类打开文章")
     public String categories(Map<String, Object> model) throws TreeHoleException {
         //加载配置信息
         model.put("site", this.getSiteConfig());

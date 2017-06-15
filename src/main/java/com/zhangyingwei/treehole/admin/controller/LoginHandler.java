@@ -3,6 +3,7 @@ package com.zhangyingwei.treehole.admin.controller;
 import com.zhangyingwei.treehole.admin.model.User;
 import com.zhangyingwei.treehole.common.Pages;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
+import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
 import com.zhangyingwei.treehole.install.service.AdminInitService;
@@ -37,6 +38,7 @@ public class LoginHandler {
     private AdminInitService adminInitService;
 
     @GetMapping
+    @TreeHoleAtcion("打开管理端首页")
     public String index(Map<String, Object> model, HttpSession session, HttpServletRequest request) {
         if (TreeHoleUtils.isLogin(session)) {
             session.setAttribute(TreeHoleEnum.LOGIN_MENU_KEY.getValue(),TreeHoleUtils.getMenu());
@@ -48,12 +50,14 @@ public class LoginHandler {
     }
 
     @GetMapping("/login")
+    @TreeHoleAtcion("打开登录页面")
     public String loginIndex(HttpServletRequest request) {
         Cookie[] cookie = request.getCookies();
         return Pages.ADMIN_LOGIN;
     }
 
     @PostMapping("/login")
+    @TreeHoleAtcion("登录")
     public String login(HttpSession session, @Valid User user) throws TreeHoleException {
         logger.info(user.toString());
         //记录登录用户信息到session
@@ -72,6 +76,7 @@ public class LoginHandler {
     }
 
     @GetMapping("/logout")
+    @TreeHoleAtcion("登出")
     public String logout(HttpSession session){
         TreeHoleUtils.logout(session);
         logger.info("logout");

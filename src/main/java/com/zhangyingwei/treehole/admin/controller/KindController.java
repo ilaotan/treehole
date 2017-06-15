@@ -5,6 +5,7 @@ import com.zhangyingwei.treehole.admin.service.ArticleService;
 import com.zhangyingwei.treehole.admin.service.KindService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.Pages;
+import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,7 @@ public class KindController {
      * @throws TreeHoleException
      */
     @RequestMapping
+    @TreeHoleAtcion("打开分类信息页面")
     public String indexKind(Map<String,Object> model) throws TreeHoleException {
         List<Kind> kinds = this.kindService.getKinds();
         model.put("kinds", kinds);
@@ -47,6 +49,7 @@ public class KindController {
      */
     @DeleteMapping("/{id}")
     @ResponseBody
+    @TreeHoleAtcion("删除分类信息")
     public Map<String,Object> deleteById(@PathVariable("id") String id,String type) throws TreeHoleException {
         if(type!=null){
             this.kindService.deleteKindById(id, type);
@@ -64,6 +67,7 @@ public class KindController {
      */
     @PutMapping
     @ResponseBody
+    @TreeHoleAtcion("修改分类信息")
     public Map<String,Object> editKindInfo(@Valid Kind kind) throws TreeHoleException {
         this.kindService.editKindInfo(kind);
         return Ajax.success("修改分类信息成功");
@@ -77,6 +81,7 @@ public class KindController {
      */
     @PostMapping
     @ResponseBody
+    @TreeHoleAtcion("添加分类信息")
     public Map<String,Object> addKindInfo(@Valid Kind kind) throws TreeHoleException {
         this.kindService.addKindInfo(kind);
         return Ajax.success("添加分类信息成功");

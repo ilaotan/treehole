@@ -5,6 +5,7 @@ import com.zhangyingwei.treehole.admin.service.FileManagerService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.Pages;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
+import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -31,12 +32,14 @@ public class FileManageController {
     @Autowired
     private FileManagerService fileManagerService;
     @GetMapping
+    @TreeHoleAtcion("打开附件管理页面")
     public String fileManageIndex(){
         return Pages.ADMIN_FILEMANAGE;
     }
 
     @PostMapping("/upload")
     @ResponseBody
+    @TreeHoleAtcion("上传文件")
     public Map<String, Object> upload(MultipartFile file) throws TreeHoleException {
         this.fileManagerService.saveFile(file);
         return Ajax.success("success");
@@ -45,6 +48,7 @@ public class FileManageController {
 
     @DeleteMapping("/{id}")
     @ResponseBody
+    @TreeHoleAtcion("删除文件")
     public Map<String,Object> delete(@PathVariable("id") String id) throws TreeHoleException {
         this.fileManagerService.deleteFile(id);
         this.fileManagerService.deleteFileInfo(id);
@@ -53,6 +57,7 @@ public class FileManageController {
 
     @GetMapping("/list")
     @ResponseBody
+    @TreeHoleAtcion("查询文件列表")
     public Map<String, Object> listFiles() throws TreeHoleException {
         List<FileRes> files = this.fileManagerService.findFiles();
         return Ajax.success(files);
