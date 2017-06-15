@@ -62,4 +62,12 @@ public class FileManageController {
         List<FileRes> files = this.fileManagerService.findFiles();
         return Ajax.success(files);
     }
+
+    @GetMapping("/count")
+    @ResponseBody
+    @TreeHoleAtcion("获取素材总数")
+    public Map<String,Object> getFilesCount() throws TreeHoleException{
+        Integer count = this.fileManagerService.getFileCount();
+        return Ajax.success(count);
+    }
 }

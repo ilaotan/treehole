@@ -118,6 +118,13 @@ public class InterCeptorController2 {
         return ip;
     }
 
+    /**
+     * 获取用户行为
+     * @param joinPoint
+     * @return
+     * @throws NoSuchFieldException
+     * @throws IllegalAccessException
+     */
     private String getAction(JoinPoint joinPoint) throws NoSuchFieldException, IllegalAccessException {
         MethodInvocationProceedingJoinPoint methodPoint = (MethodInvocationProceedingJoinPoint)joinPoint;
         Annotation[] aaa = methodPoint.getClass().getAnnotations();

@@ -56,4 +56,7 @@ public interface ArticleDao {
 
     @Update("update article set title=#{article.title},subpath=#{article.subpath},tags=#{article.tags},intro=#{article.intro},introHtml=#{article.introHtml},article=#{article.article},articleHtml=#{article.articleHtml},usecommont=#{article.usecommont},flag=#{article.flag},date=datetime() where id=#{article.id}")
     void updateArticleById(@Param("article") Article article) throws  Exception;
+
+    @Select("select count(*) from article")
+    Integer getPostCount() throws Exception;
 }

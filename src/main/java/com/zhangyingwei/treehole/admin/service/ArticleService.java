@@ -196,4 +196,12 @@ public class ArticleService {
             throw new TreeHoleException("根据id编辑文章错误",e);
         }
     }
+
+    public Integer getPostCount() throws TreeHoleException {
+        try {
+            return this.articleDao.getPostCount();
+        } catch (Exception e) {
+            throw new TreeHoleException("获取发表文章总数错误");
+        }
+    }
 }

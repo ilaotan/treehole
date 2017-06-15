@@ -24,4 +24,7 @@ public interface FileResDao {
 
     @Delete("delete from files where id=#{id}")
     void deleteById(@Param("id") String id) throws Exception;
+
+    @Select("select count(*) from files")
+    Integer selectFileCount() throws Exception;
 }

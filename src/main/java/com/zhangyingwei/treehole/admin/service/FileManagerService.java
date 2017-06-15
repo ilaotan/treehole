@@ -114,4 +114,12 @@ public class FileManagerService {
             TreeHoleUtils.deleteUploadFile(fileRes.getPath());
         }
     }
+
+    public Integer getFileCount() throws TreeHoleException {
+        try {
+            return this.fileResDao.selectFileCount();
+        } catch (Exception e) {
+            throw new TreeHoleException("获取素材总数错误");
+        }
+    }
 }

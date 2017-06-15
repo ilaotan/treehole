@@ -142,4 +142,12 @@ public class ArticleController {
         model.put("articles", articles);
         return Pages.ADMIN_ARTICLES_HISTORY;
     }
+
+    @GetMapping("/count")
+    @ResponseBody
+    @TreeHoleAtcion("获取文章总数")
+    public Map<String,Object> getArticleCount() throws TreeHoleException {
+        Integer count = this.articleService.getPostCount();
+        return Ajax.success(count);
+    }
 }
