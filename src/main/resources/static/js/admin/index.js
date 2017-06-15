@@ -149,8 +149,6 @@ function getVisitCountByDay(charts) {
         ['2017-05-08','2017-05-07','2017-05-06','2017-05-05','2017-05-04','2017-05-03','2017-05-02'],
         [0, 3, 8, 2, 5, 12, 4]
     ]
-
-
     $.ajax({
         url: "/log/visits/count/days",
         type: "GET",
@@ -175,8 +173,6 @@ function getVisitSources(charts){
         {value:135, name:'视频广告'},
         {value:1548, name:'搜索引擎'}
     ];
-    charts.visit.pie.init(pie_data).create();
-
     $.ajax({
         url: "/log/visits/sources",
         type: "GET",

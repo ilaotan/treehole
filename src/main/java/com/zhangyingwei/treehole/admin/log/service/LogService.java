@@ -2,6 +2,7 @@ package com.zhangyingwei.treehole.admin.log.service;
 
 import com.zhangyingwei.treehole.admin.log.dao.LogDao;
 import com.zhangyingwei.treehole.admin.log.model.LogModel;
+import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.utils.DateUtils;
 import org.slf4j.Logger;
@@ -62,7 +63,8 @@ public class LogService {
                     countMap.put(date,countMap.get(date)+1);
                 }
             }
-            return new Object[]{countMap.keySet(),countMap.values()};
+            Object[] result = new Object[]{countMap.keySet(), countMap.values()};
+            return result;
         } catch (Exception e) {
             throw new TreeHoleException("按天统计访问情况错误");
         }
