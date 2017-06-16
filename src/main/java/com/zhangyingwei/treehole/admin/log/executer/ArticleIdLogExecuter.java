@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * 日志处理类
  */
 @Component
-public class DefaultLogExecuter implements LogExecuter {
+public class ArticleIdLogExecuter implements LogExecuter {
 
     /**
      * 处理日志的方法
@@ -23,14 +23,9 @@ public class DefaultLogExecuter implements LogExecuter {
         //获取ip地址的位置信息
         if(StringUtils.isNotEmpty(log.getIp())){
             try {
-                if (log.getUri().startsWith("/articles") && !"/articls".equals(log.getUri())) {
-
-                    String[] uris = log.getUri().split("/");
-                    String id = uris[uris.length - 1];
-                    log.setAction(log.getAction() + "[" + id + "]");
-                }
+                log.setIp_location(TreeHoleUtils.ipLocal(log.getIp()));
             } catch (Exception e) {
-                throw new TreeHoleLogException("获取文章编号错误");
+                throw new TreeHoleLogException("获取 ip 物理位置错误: " + log.getIp());
             }
         }
         return log;

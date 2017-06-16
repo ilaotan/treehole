@@ -1,0 +1,27 @@
+.treehole-page {
+    list-style: none;
+    text-align: center;
+    margin:0;
+    padding:0;
+}
+
+.treehole-page li{
+    float: left;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #607d8b;
+    margin: 1px;
+    color: #fff0d5;
+}
+.treehole-page li:hover{
+    cursor: pointer;
+    background-color: rgba(96, 125, 139, 0.66);
+}
+.treehole-page li.noclick:hover{
+    cursor: auto;
+    background-color: #607d8b;
+}
+.treehole-page li.select{
+    background-color: rgba(96, 125, 139, 0.66);
+}

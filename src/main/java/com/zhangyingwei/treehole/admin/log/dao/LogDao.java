@@ -1,6 +1,8 @@
 package com.zhangyingwei.treehole.admin.log.dao;
 
 import com.zhangyingwei.treehole.admin.log.model.LogModel;
+import com.zhangyingwei.treehole.admin.log.model.PieView;
+import com.zhangyingwei.treehole.common.PageInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,7 +20,17 @@ public interface LogDao {
     @Select("select count(*) from (select * from log group by ip)")
     Integer getVisitCount() throws Exception;
     @Select("select * from log where timestamp>#{timestamp}")
-    List<LogModel> countByDay(Long timestamp) throws Exception;
+    List<LogModel> listCountByDay(Long timestamp) throws Exception;
     @Select("select referer from log where referer is not null")
-    List<LogModel> visits();
+    List<LogModel> listVisits();
+    @Select("select id,ip,uri,timestamp from log where uri not like '/admin%' and uri not like '/log%' limit #{page.start},#{page.pageSize}")
+    List<LogModel> listVisitBlogsByPage(@Param("page") PageInfo pageInfo) throws Exception;
+    @Select("select count(*) from log where uri not like '/admin%' and uri not like '/log%'")
+    Integer getVisitBlogCount(@Param("page") PageInfo pageInfo) throws Exception;
+    @Select("select ip_location as name,count(*) as value from log where ip_location is not null and ip_location !='' group by ip_location")
+    List<PieView> getVisitBlogUris() throws Exception;
+    @Select("select * from log where uri not like '/admin%' and uri not like '/log%'")
+    List<LogModel> listVisitBlogs() throws Exception;
+    @Select("select action as name,count(*) as value from log where uri not like '/admin%' and uri not like '/log%' and action is not null and action !='' group by action")
+    List<PieView> getVisitBlogActions() throws Exception;
 }

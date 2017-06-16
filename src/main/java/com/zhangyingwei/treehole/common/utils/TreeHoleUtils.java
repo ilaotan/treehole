@@ -1,5 +1,7 @@
 package com.zhangyingwei.treehole.common.utils;
 
+import com.zhangyingwei.treehole.admin.log.filter.LogFilter;
+import com.zhangyingwei.treehole.admin.log.model.LogModel;
 import com.zhangyingwei.treehole.admin.model.Article;
 import com.zhangyingwei.treehole.admin.model.Menu;
 import com.zhangyingwei.treehole.admin.model.User;
@@ -479,5 +481,32 @@ public class TreeHoleUtils {
         element.addAttribute("version", "2.0");
         element.addAttribute("xmlns:atom", "http://www.w3.org/2005/Atom");
         return element;
+    }
+
+    /**
+     * 过滤日志
+     * @param visits
+     */
+    public static void filterLog(List<LogModel> visits, LogFilter logFilter) {
+        Iterator<LogModel> it = visits.iterator();
+        while(it.hasNext()){
+            LogModel log = it.next();
+            if(logFilter.access(log)){
+                it.remove();
+            }
+        }
+    }
+
+    /**
+     * 获取浏览器类型
+     * @param agent
+     * @return
+     */
+    public static String getExplore(String agent) {
+        if(StringUtils.isEmpty(agent)){
+            return "未识别";
+        }
+        String[] tmp = agent.split(" ");
+        return tmp[tmp.length-1];
     }
 }

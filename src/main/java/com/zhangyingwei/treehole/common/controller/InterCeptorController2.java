@@ -80,7 +80,6 @@ public class InterCeptorController2 {
         HttpServletResponse response = attributes.getResponse();
         HttpSession session = request.getSession();
         String uri = request.getRequestURI();
-
         LogModel log = new LogModel();
         log.setIp(getIpAddress(request));
         log.setUrl(request.getRequestURL().toString());
