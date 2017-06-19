@@ -24,7 +24,7 @@ PageInfo.prototype.getTotalPage = function () {
     if(this.total%this.pageSize==0){
         this.totalPage = this.total / this.pageSize;
     }else{
-        this.totalPage = (this.total / this.pageSize) + 1;
+        this.totalPage = Math.floor(this.total / this.pageSize) + 1;
     }
 };
 PageInfo.prototype.createPages = function () {
@@ -36,8 +36,9 @@ PageInfo.prototype.bulidHtml = function () {
     var html = "<ul class='treehole-page'>";
     html += "<li class='before'>&lt;</li>";
     var flag = false;
+    var current = this.current;
     for(var i = 1;i<=this.totalPage;i++){
-        html += this.bulidItem(i);
+        // html += this.bulidItem(i);
         // if(i<=3||i>this.pageSize-3){
         //     html += this.bulidItem(i);
         // }else{
@@ -46,6 +47,14 @@ PageInfo.prototype.bulidHtml = function () {
         //         flag = true;
         //     }
         // }
+        if(i == this.totalPage || (current-i>-2 && current-1<2)){
+            html += this.bulidItem(i);
+        }else{
+            if(!flag){
+                html += "<li class='noclick'> ... </li>";
+                flag = true;
+            }
+        }
     }
     html += "<li class='after'>&gt;</li>";
     return html;

@@ -19,7 +19,6 @@ public class CollectionUtils {
         Collections.sort(list);
         Map resultMap = new TreeMap();
         for (Object k : list) {
-            System.out.println(k);
             resultMap.put(k, map.get(k));
         }
         return resultMap;

@@ -23,8 +23,7 @@ public class DefaultLogExecuter implements LogExecuter {
         //获取ip地址的位置信息
         if(StringUtils.isNotEmpty(log.getIp())){
             try {
-                if (log.getUri().startsWith("/articles") && !"/articls".equals(log.getUri())) {
-
+                if (log.getUri().startsWith("/articles/")) {
                     String[] uris = log.getUri().split("/");
                     String id = uris[uris.length - 1];
                     log.setAction(log.getAction() + "[" + id + "]");

@@ -215,8 +215,8 @@ function getVisitAction(charts){
  */
 function getVisitPage(){
     var data = [{
-        id:1,ip:2,uri:3,timestamp:4
-    }]
+        id: 1, ip: 2, uri: 3, timestamp: 4
+    }];
     $.ajax({
         url:"/log/visits/actions",
         data: {
@@ -239,40 +239,74 @@ function getVisitPage(){
 }
 
 function bulidPages(page){
-    new PageInfo({
-        el: $("#page"),
-        pageSize:page.pageSize,
-        total:page.total,
-        current:page.current,
-        actions:{
-            change: function(index){
-                var load = layer.load(1)
-                $.ajax({
-                    url:"/log/visits/actions",
-                    data: {
-                        pageSize:10,
-                        current: index
-                    },
-                    type: "GET",
-                    success: function (data) {
-                        if(data.code === 200){
-                            var tableHtml = bulidTableHtml(data.result.data.data);
-                            $(".uri-table").find("table").find("tbody").remove();
-                            $(".uri-table").find("table").append(tableHtml);
-                            bulidPages(data.result.data.page);
-                        }else{
-                            layer.msg(data.message);
-                        }
-                        layer.close(load);
-                    },
-                    error: function () {
-                        layer.msg("加载页面访问信息错误");
-                        layer.close(load);
+    $.jqPaginator('#page', {
+        totalPages: page.totalPages,
+        visiblePages: 5,
+        currentPage: page.current,
+        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+        onPageChange: function (index, type) {
+            var load = layer.load(1);
+            $.ajax({
+                url:"/log/visits/actions",
+                data: {
+                    pageSize:10,
+                    current: index
+                },
+                type: "GET",
+                success: function (data) {
+                    if(data.code === 200){
+                        var tableHtml = bulidTableHtml(data.result.data.data);
+                        $(".uri-table").find("table").find("tbody").remove();
+                        $(".uri-table").find("table").append(tableHtml);
+                        // bulidPages(data.result.data.page);
+                    }else{
+                        layer.msg(data.message);
                     }
-                })
-            }
+                    layer.close(load);
+                },
+                error: function () {
+                    layer.msg("加载页面访问信息错误");
+                    layer.close(load);
+                }
+            })
         }
     });
+    // new PageInfo({
+    //     el: $("#page"),
+    //     pageSize:page.pageSize,
+    //     total:page.total,
+    //     current:page.current,
+    //     actions:{
+    //         change: function(index){
+    //             var load = layer.load(1)
+    //             $.ajax({
+    //                 url:"/log/visits/actions",
+    //                 data: {
+    //                     pageSize:10,
+    //                     current: index
+    //                 },
+    //                 type: "GET",
+    //                 success: function (data) {
+    //                     if(data.code === 200){
+    //                         var tableHtml = bulidTableHtml(data.result.data.data);
+    //                         $(".uri-table").find("table").find("tbody").remove();
+    //                         $(".uri-table").find("table").append(tableHtml);
+    //                         bulidPages(data.result.data.page);
+    //                     }else{
+    //                         layer.msg(data.message);
+    //                     }
+    //                     layer.close(load);
+    //                 },
+    //                 error: function () {
+    //                     layer.msg("加载页面访问信息错误");
+    //                     layer.close(load);
+    //                 }
+    //             })
+    //         }
+    //     }
+    // });
 }
 
 function bulidTableHtml(data){

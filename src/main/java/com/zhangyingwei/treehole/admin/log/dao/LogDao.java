@@ -31,6 +31,6 @@ public interface LogDao {
     List<PieView> getVisitBlogUris() throws Exception;
     @Select("select * from log where uri not like '/admin%' and uri not like '/log%'")
     List<LogModel> listVisitBlogs() throws Exception;
-    @Select("select action as name,count(*) as value from log where uri not like '/admin%' and uri not like '/log%' and action is not null and action !='' group by action")
+    @Select("select action as name,count(*) as value from log where uri like '/articles%' and action is not null and action !='' group by action")
     List<PieView> getVisitBlogActions() throws Exception;
 }
