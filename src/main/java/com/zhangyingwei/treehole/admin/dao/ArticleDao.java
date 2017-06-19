@@ -45,7 +45,7 @@ public interface ArticleDao {
     @Select("select * from article where kind=#{id} and id=1")
     List<Article> selectPostByKind(String id) throws Exception;
 
-    @Update("update article set flag=1,date=datetime('now','localhost') where id=#{id}")
+    @Update("update article set flag=1,date=datetime('now','localtime') where id=#{id}")
     void publish(String id) throws  Exception;
 
     @Delete("delete from article where id=#{id}")
@@ -54,7 +54,7 @@ public interface ArticleDao {
     @Update("update article set flag=9 where id=#{id}")
     void deleteStateById(String id) throws Exception;
 
-    @Update("update article set title=#{article.title},subpath=#{article.subpath},tags=#{article.tags},intro=#{article.intro},introHtml=#{article.introHtml},article=#{article.article},articleHtml=#{article.articleHtml},usecommont=#{article.usecommont},flag=#{article.flag},date=datetime('now','localhost') where id=#{article.id}")
+    @Update("update article set title=#{article.title},subpath=#{article.subpath},tags=#{article.tags},intro=#{article.intro},introHtml=#{article.introHtml},article=#{article.article},articleHtml=#{article.articleHtml},usecommont=#{article.usecommont},flag=#{article.flag},date=datetime('now','localtime') where id=#{article.id}")
     void updateArticleById(@Param("article") Article article) throws  Exception;
 
     @Select("select count(*) from article")
