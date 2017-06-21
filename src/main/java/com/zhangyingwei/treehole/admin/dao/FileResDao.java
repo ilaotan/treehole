@@ -1,7 +1,12 @@
 package com.zhangyingwei.treehole.admin.dao;
 
 import com.zhangyingwei.treehole.admin.model.FileRes;
+import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import org.apache.ibatis.annotations.*;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
