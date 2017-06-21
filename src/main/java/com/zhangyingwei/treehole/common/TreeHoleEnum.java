@@ -31,4 +31,6 @@ public enum TreeHoleEnum {
     public String getValue() {
         return value;
     }
+
+    public static final String DEFAULT_EHCACHE = "treehole-default";
 }
