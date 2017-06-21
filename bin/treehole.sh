@@ -12,6 +12,18 @@ get_pid(){
     echo "$pid"
 }
 
+# get path
+get_path(){
+    path = $0
+    if [$path == "./treehole.sh"]
+    then
+        echo "aaaaaa"
+    else
+        echo "bbbb"
+    fi
+
+}
+
 show_status(){
     pid=$(get_pid)
     if [ "$pid" != "" ]
