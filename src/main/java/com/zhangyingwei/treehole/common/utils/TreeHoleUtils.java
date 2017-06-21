@@ -29,6 +29,7 @@ import java.util.*;
 public class TreeHoleUtils {
 
     private static Logger logger = LoggerFactory.getLogger(TreeHoleUtils.class);
+    private static final int LOGIN_TIMEOUT = 1000*60*60*2;//登录状态保存时间 2个小时
 
     /**
      * 判断是否已经安装
@@ -146,6 +147,7 @@ public class TreeHoleUtils {
      */
     public static void markAsLogin(HttpSession session, User user) {
         session.setAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue(), user);
+        session.setMaxInactiveInterval(LOGIN_TIMEOUT);
     }
 
     /**
