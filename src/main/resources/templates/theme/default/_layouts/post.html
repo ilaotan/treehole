@@ -25,6 +25,16 @@ var sourceBasePath = blog.url! + + '/theme/' + theme;
             </article>
         </div>
       </div>
+
+        <!--分享-->
+      <div class="panel docs-content" style="overflow: inherit !important;">
+          <div class="post-content">
+              <div class="wrapper" style="padding-top: 60px;">
+                  <% include("../../../lib/share.html"){} %>
+              </div>
+          </div>
+      </div>
+
       <div class="panel docs-content">
         <div class="post-content">
           <div class="wrapper">

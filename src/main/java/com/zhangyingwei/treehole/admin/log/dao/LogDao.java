@@ -23,7 +23,7 @@ public interface LogDao {
     List<LogModel> listCountByDay(Long timestamp) throws Exception;
     @Select("select referer from log where referer is not null")
     List<LogModel> listVisits();
-    @Select("select id,ip,uri,timestamp from log where uri not like '/admin%' and uri not like '/log%' limit #{page.start},#{page.pageSize}")
+    @Select("select id,ip,uri,timestamp from log where uri not like '/admin%' and uri not like '/log%' order by id desc limit #{page.start},#{page.pageSize}")
     List<LogModel> listVisitBlogsByPage(@Param("page") PageInfo pageInfo) throws Exception;
     @Select("select count(*) from log where uri not like '/admin%' and uri not like '/log%'")
     Integer getVisitBlogCount(@Param("page") PageInfo pageInfo) throws Exception;

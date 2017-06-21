@@ -1,6 +1,7 @@
 package com.zhangyingwei.treehole.common.utils;
 
 import com.zhangyingwei.treehole.admin.log.filter.LogFilter;
+import com.zhangyingwei.treehole.admin.log.model.Agent;
 import com.zhangyingwei.treehole.admin.log.model.LogModel;
 import com.zhangyingwei.treehole.admin.model.Article;
 import com.zhangyingwei.treehole.admin.model.Menu;
@@ -508,7 +509,7 @@ public class TreeHoleUtils {
         if(StringUtils.isEmpty(agent)){
             return "未识别";
         }
-        String[] tmp = agent.split(" ");
-        return tmp[tmp.length-1];
+        Agent agentObj = new Agent(agent);
+        return agentObj.getBrowser();
     }
 }
