@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,6 @@ public class ArticleService {
      * @return
      * @throws TreeHoleException
      */
-    @Cacheable(value = TreeHoleEnum.DEFAULT_EHCACHE,key = "ArticleService_getKinds")
     public List<Kind> getKinds() throws TreeHoleException {
         try {
             return this.kindDao.selectKinds();
@@ -46,7 +46,6 @@ public class ArticleService {
      * @return
      * @throws TreeHoleException
      */
-    @Cacheable(value = TreeHoleEnum.DEFAULT_EHCACHE, key = "ArticleService_getArticles")
     public List<Article> getArticles() throws TreeHoleException {
         try {
             return this.articleDao.selectArticles();
@@ -61,7 +60,6 @@ public class ArticleService {
      * @return
      * @throws TreeHoleException
      */
-    @Cacheable(value = TreeHoleEnum.DEFAULT_EHCACHE, key = "ArticleService_getPosts")
     public List<Article> getPosts() throws TreeHoleException {
         try {
             return this.articleDao.selectPosts();
@@ -75,7 +73,6 @@ public class ArticleService {
      * @param subpath
      * @return
      */
-    @Cacheable(value = TreeHoleEnum.DEFAULT_EHCACHE, key = "ArticleService_getArticleBySubPath")
     public Article getArticleBySubPath(String subpath) throws TreeHoleException {
         try {
             return this.articleDao.selectArticleBySubpath(subpath);
@@ -89,7 +86,6 @@ public class ArticleService {
      * @param subpath
      * @return
      */
-    @Cacheable(value = TreeHoleEnum.DEFAULT_EHCACHE, key = "ArticleService_getPostBySubPath")
     public Article getPostBySubPath(String subpath) throws TreeHoleException {
         try {
             return this.articleDao.selectPostBySubpath(subpath);
@@ -103,7 +99,6 @@ public class ArticleService {
      * @param title
      * @return
      */
-    @Cacheable(value = TreeHoleEnum.DEFAULT_EHCACHE, key = "ArticleService_getArticleByTitle")
     public Article getArticleByTitle(String title) throws TreeHoleException {
         try {
             return this.articleDao.selectArticleByTitle(title);
@@ -118,7 +113,6 @@ public class ArticleService {
      * @return
      * @throws Exception
      */
-    @Cacheable(value = TreeHoleEnum.DEFAULT_EHCACHE, key = "ArticleService_getArticleById")
     public Article getArticleById(String id) throws TreeHoleException {
         try {
             return this.articleDao.selectArticleById(id);
@@ -133,7 +127,6 @@ public class ArticleService {
      * @return
      * @throws Exception
      */
-    @Cacheable(value = TreeHoleEnum.DEFAULT_EHCACHE, key = "ArticleService_getPostById")
     public Article getPostById(String id) throws TreeHoleException {
         try {
             return this.articleDao.selectPostById(id);
@@ -147,7 +140,6 @@ public class ArticleService {
      * @param article
      * @throws TreeHoleException
      */
-    @Cacheable(value = TreeHoleEnum.DEFAULT_EHCACHE, key = "ArticleService_addArticle")
     public void addArticle(Article article) throws TreeHoleException{
         try {
             if(StringUtils.isNotEmpty(article.getSubpath())){
@@ -173,7 +165,6 @@ public class ArticleService {
      * 修改状态为发布状态即可
      * @param id
      */
-    @Cacheable(value = TreeHoleEnum.DEFAULT_EHCACHE, key = "ArticleService_addPublishArticle")
     public void addPublishArticle(String id) throws TreeHoleException {
         try {
             this.articleDao.publish(id);
@@ -186,7 +177,6 @@ public class ArticleService {
      * 删除文章
      * @param id
      */
-    @Cacheable(value = TreeHoleEnum.DEFAULT_EHCACHE, key = "ArticleService_deleteArticle")
     public void deleteArticle(String id,boolean state) throws TreeHoleException {
         try{
             if(state){
@@ -203,7 +193,6 @@ public class ArticleService {
      * 编辑文章
      * @param article
      */
-    @Cacheable(value = TreeHoleEnum.DEFAULT_EHCACHE, key = "ArticleService_editArticle")
     public void editArticle(Article article) throws TreeHoleException {
         try {
             this.articleDao.updateArticleById(article);
@@ -213,7 +202,6 @@ public class ArticleService {
         }
     }
 
-    @Cacheable(value = TreeHoleEnum.DEFAULT_EHCACHE, key = "ArticleService_getPostCount")
     public Integer getPostCount() throws TreeHoleException {
         try {
             return this.articleDao.getPostCount();

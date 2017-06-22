@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
 /**
  * Created by zhangyw on 2017/5/8.
@@ -12,6 +14,7 @@ import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface BlogInfoDao {
+
     @Select("select * from bloginfo")
     BlogConf select();
 
