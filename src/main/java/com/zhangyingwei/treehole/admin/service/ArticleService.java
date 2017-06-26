@@ -20,7 +20,7 @@ import java.util.List;
  * Created by zhangyw on 2017/5/15.
  */
 @Service
-public class ArticleService {
+public class ArticleService implements IArticleService {
     private Logger logger = LoggerFactory.getLogger(ArticleService.class);
     @Autowired
     private KindDao kindDao;
@@ -32,6 +32,7 @@ public class ArticleService {
      * @return
      * @throws TreeHoleException
      */
+    @Override
     public List<Kind> getKinds() throws TreeHoleException {
         try {
             return this.kindDao.selectKinds();
@@ -46,6 +47,7 @@ public class ArticleService {
      * @return
      * @throws TreeHoleException
      */
+    @Override
     public List<Article> getArticles() throws TreeHoleException {
         try {
             return this.articleDao.selectArticles();
@@ -60,6 +62,7 @@ public class ArticleService {
      * @return
      * @throws TreeHoleException
      */
+    @Override
     public List<Article> getPosts() throws TreeHoleException {
         try {
             return this.articleDao.selectPosts();
@@ -73,6 +76,7 @@ public class ArticleService {
      * @param subpath
      * @return
      */
+    @Override
     public Article getArticleBySubPath(String subpath) throws TreeHoleException {
         try {
             return this.articleDao.selectArticleBySubpath(subpath);
@@ -86,6 +90,7 @@ public class ArticleService {
      * @param subpath
      * @return
      */
+    @Override
     public Article getPostBySubPath(String subpath) throws TreeHoleException {
         try {
             return this.articleDao.selectPostBySubpath(subpath);
@@ -99,6 +104,7 @@ public class ArticleService {
      * @param title
      * @return
      */
+    @Override
     public Article getArticleByTitle(String title) throws TreeHoleException {
         try {
             return this.articleDao.selectArticleByTitle(title);
@@ -113,6 +119,7 @@ public class ArticleService {
      * @return
      * @throws Exception
      */
+    @Override
     public Article getArticleById(String id) throws TreeHoleException {
         try {
             return this.articleDao.selectArticleById(id);
@@ -127,6 +134,7 @@ public class ArticleService {
      * @return
      * @throws Exception
      */
+    @Override
     public Article getPostById(String id) throws TreeHoleException {
         try {
             return this.articleDao.selectPostById(id);
@@ -140,6 +148,7 @@ public class ArticleService {
      * @param article
      * @throws TreeHoleException
      */
+    @Override
     public void addArticle(Article article) throws TreeHoleException{
         try {
             if(StringUtils.isNotEmpty(article.getSubpath())){
@@ -165,6 +174,7 @@ public class ArticleService {
      * 修改状态为发布状态即可
      * @param id
      */
+    @Override
     public void addPublishArticle(String id) throws TreeHoleException {
         try {
             this.articleDao.publish(id);
@@ -177,6 +187,7 @@ public class ArticleService {
      * 删除文章
      * @param id
      */
+    @Override
     public void deleteArticle(String id,boolean state) throws TreeHoleException {
         try{
             if(state){
@@ -193,6 +204,7 @@ public class ArticleService {
      * 编辑文章
      * @param article
      */
+    @Override
     public void editArticle(Article article) throws TreeHoleException {
         try {
             this.articleDao.updateArticleById(article);
@@ -202,6 +214,7 @@ public class ArticleService {
         }
     }
 
+    @Override
     public Integer getPostCount() throws TreeHoleException {
         try {
             return this.articleDao.getPostCount();

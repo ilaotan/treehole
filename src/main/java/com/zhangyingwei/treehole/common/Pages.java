@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * Created by zhangyw on 2017/4/21.
+ * 路由导航信息
  */
 public class Pages {
     public static final String INSTALL = "install";

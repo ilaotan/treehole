@@ -12,7 +12,7 @@ import java.util.Date;
  * @author: zhangyw
  * @date: 2017/6/1
  * @time: 下午10:19
- * @desc:
+ * @desc: beetl 自定义方法 时间转换为月份
  */
 public class MonthFromString implements Function {
     @Override

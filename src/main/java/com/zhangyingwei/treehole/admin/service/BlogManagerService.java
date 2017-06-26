@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * Created by zhangyw on 2017/5/8.
  */
 @Service
-public class BlogManagerService {
+public class BlogManagerService implements IBlogManagerService{
     private Logger logger = LoggerFactory.getLogger(BlogManagerService.class);
 
     @Autowired
@@ -23,6 +23,7 @@ public class BlogManagerService {
     @Autowired
     private InstallInfoDao installInfoDao;
 
+    @Override
     public BlogConf getBlogConf() throws TreeHoleException {
         BlogConf blogConf = new BlogConf();
         try {
@@ -33,7 +34,7 @@ public class BlogManagerService {
         }
         return blogConf;
     }
-
+    @Override
     public InstallConf getInstallinfo() throws TreeHoleException {
         InstallConf installConf = null;
         try{
@@ -43,7 +44,7 @@ public class BlogManagerService {
         }
         return installConf;
     }
-
+    @Override
     public void updateBlogInfo(BlogConf blogConf) throws TreeHoleException{
         try {
             this.blogInfoDao.updateBlogInfo(blogConf);

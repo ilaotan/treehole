@@ -26,7 +26,7 @@ import java.util.UUID;
  * @desc: 素材管理
  */
 @Service
-public class FileManagerService {
+public class FileManagerService implements IFileManagerService {
     private Logger logger = LoggerFactory.getLogger(FileManagerService.class);
     @Autowired
     private FileResDao fileResDao;
@@ -37,6 +37,7 @@ public class FileManagerService {
      * @param file
      * @throws TreeHoleException
      */
+    @Override
     public void saveFile(MultipartFile file) throws TreeHoleException {
         try {
             String fileName = file.getOriginalFilename();
@@ -62,6 +63,7 @@ public class FileManagerService {
      * @param fileRes
      * @throws Exception
      */
+    @Override
     public void saveFileInfo(FileRes fileRes) throws Exception {
         this.fileResDao.insert(fileRes);
     }
@@ -71,6 +73,7 @@ public class FileManagerService {
      * @param alias
      * @return File
      */
+    @Override
     public FileRes findFileByAlias(String alias) throws Exception {
         FileRes fileRes = this.fileResDao.selectByAlias(alias);
         if(fileRes == null){
@@ -82,6 +85,7 @@ public class FileManagerService {
     /**
      * 查询所有素材文件
      */
+    @Override
     public List<FileRes> findFiles() throws TreeHoleException{
         try {
             return this.fileResDao.selectFiles();
@@ -95,6 +99,7 @@ public class FileManagerService {
      * 从数据库删除文件信息
      * @param id
      */
+    @Override
     public void deleteFileInfo(String id) throws TreeHoleException {
         try {
             this.fileResDao.deleteById(id);
@@ -108,6 +113,7 @@ public class FileManagerService {
      * 从硬盘中删除文件
      * @param id
      */
+    @Override
     public void deleteFile(String id){
         FileRes fileRes = this.fileResDao.selectById(id);
         if(fileRes!=null){
@@ -115,6 +121,7 @@ public class FileManagerService {
         }
     }
 
+    @Override
     public Integer getFileCount() throws TreeHoleException {
         try {
             return this.fileResDao.selectFileCount();

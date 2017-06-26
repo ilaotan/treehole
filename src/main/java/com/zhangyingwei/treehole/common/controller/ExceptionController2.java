@@ -25,14 +25,14 @@ public class ExceptionController2 {
     @ExceptionHandler(value = {BindException.class, TreeHoleException.class,NullPointerException.class})
     public Object bindExceptionHandler(Exception ex){
         String message = "";
-        logger.info("hello exception: "+message);
         if(ex instanceof BindException){
             BindException bex = (BindException) ex;
             message = bex.getFieldError().getDefaultMessage();
         }else{
             message = ex.getMessage();
         }
-        ex.printStackTrace();
+        logger.info("hello exception: "+message);
+//        ex.printStackTrace();
         return Ajax.error(message);
     }
 }

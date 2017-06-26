@@ -19,13 +19,14 @@ import java.util.List;
  * @desc:
  */
 @Service
-public class KindService {
+public class KindService implements IKindService {
     private Logger logger = Logger.getLogger(KindService.class);
     @Autowired
     private KindDao kindDao;
     @Autowired
     private ArticleDao articleDao;
 
+    @Override
     public List<Kind> getKinds() throws TreeHoleException {
         try {
             return this.kindDao.selectKinds();
@@ -45,6 +46,7 @@ public class KindService {
      * @param type
      * @throws TreeHoleException
      */
+    @Override
     public void deleteKindById(String id, String type) throws TreeHoleException {
         try {
             switch (type){
@@ -70,6 +72,7 @@ public class KindService {
      * @param kind
      * @throws TreeHoleException
      */
+    @Override
     public void editKindInfo(Kind kind) throws TreeHoleException {
         try {
             this.kindDao.updateById(kind);
@@ -83,6 +86,7 @@ public class KindService {
      * 添加分类信息
      * @param kind
      */
+    @Override
     public void addKindInfo(Kind kind) throws TreeHoleException {
         try {
             this.kindDao.insert(kind);
