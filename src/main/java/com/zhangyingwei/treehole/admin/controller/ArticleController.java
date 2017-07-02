@@ -19,7 +19,7 @@ import java.util.Map;
 
 /**
  * Created by zhangyw on 2017/5/10.
- * 文章管理controller
+ * 文章管理 controller
  */
 @Controller
 @RequestMapping("/admin/articles")

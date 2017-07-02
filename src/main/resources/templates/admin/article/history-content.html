@@ -9,6 +9,24 @@
 <h3>历史文章管理</h3>
 <div id="article_container" >
     <div class="x_panel">
+        <div class="x_title">
+            <div class="history-toobar row form-inline">
+                <div class="input-group col-md-3">
+                    <input type="text" class="form-control" id="title" placeholder="文章标题">
+                    <span class="input-group-btn">
+                        <button type="button" id="query" class="btn btn-primary">查询</button>
+                    </span>
+                </div>
+                <div class="col-md-4 input-group">
+                    <div class="btn-group">
+                        <button class="btn btn-primary statubtn" >文章状态</button>
+                        <button class="btn btn-default statubtn" value="pub" type="button">已发布</button>
+                        <button class="btn btn-default statubtn" value="nopub" type="button">未发布</button>
+                        <button class="btn btn-default statubtn" value="del" type="button">已删除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="x_content">
             <table class="table">
                 <thead>
@@ -55,7 +73,7 @@
                                 class = "label-success";
                             }
                         %>
-                        <td><span class="label ${class}" value="${article.flag!}">${ session.stateDic[article.flag+""]! }</span></td>
+                        <td><span class="statu label ${class}" value="${article.flag!}">${ session.stateDic[article.flag+""]! }</span></td>
                         <%
                             var disabled = "";
                             if(article.flag==1){

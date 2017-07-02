@@ -14,7 +14,6 @@ import com.zhangyingwei.treehole.install.model.InstallConf;
  */
 public interface IAdminInitService {
     Boolean login(User user) throws TreeHoleException;
-
     void adminInit(AdminConf adminConf) throws TreeHoleException;
     void blogInfoInit(BlogConf blogConf) throws TreeHoleException;
     void installInfoInit(InstallConf installConf) throws TreeHoleException;

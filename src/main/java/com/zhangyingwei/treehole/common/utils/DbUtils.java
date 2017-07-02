@@ -15,6 +15,7 @@ import java.sql.Statement;
 /**
  * Created by zhangyw on 2017/4/25.
  * database utils
+ * 数据库工具类
  */
 public class DbUtils {
     private static Logger logger = LoggerFactory.getLogger(DbUtils.class);

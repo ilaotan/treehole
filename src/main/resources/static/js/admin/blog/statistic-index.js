@@ -243,9 +243,9 @@ function bulidPages(page){
         totalPages: page.totalPages,
         visiblePages: 5,
         currentPage: page.current,
-        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
-        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
-        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+        // prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+        // next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+        // page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (index, type) {
             var load = layer.load(1);
             $.ajax({

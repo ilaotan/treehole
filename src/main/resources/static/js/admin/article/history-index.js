@@ -65,4 +65,56 @@ $(function () {
             }
         })
     }
+
+    var toobar = $(".history-toobar");
+    toobar.find("#query").click(function () {
+        var title = toobar.find("#title").val();
+        if(title && title.length > 0 ){
+            var trs = getTableTrs();
+        }
+    });
+
+    toobar.find(".statubtn").click(function () {
+        var value = $(this).val();
+        $.each(toobar.find(".statubtn"), function () {
+            $(this).removeClass("active");
+        });
+        $(this).addClass("active");
+        var trs = getTableTrs();
+        var statu = -1;
+        if(value==="pub"){
+            statu = 1;
+        }else if(value === "nopub"){
+            statu = 0;
+        }else if(value === "del"){
+            statu = 9;
+        }
+        showAllTrs();
+        if(statu != -1){
+            $.each(trs,function(){
+                var sta = $(this).find("td").find(".statu").attr("value");
+                if(sta.toString() != statu.toString()){
+                    $(this).hide();
+                }
+            });
+        }
+    });
+
+    /**
+     * 获取所有表格行
+     * @returns {*|jQuery}
+     */
+    var getTableTrs = function(){
+        var trs = $("table").find("tbody").find("tr");
+        return trs;
+    }
+
+    /**
+     * 显示全部表格行
+     */
+    var showAllTrs = function () {
+        $.each(getTableTrs(),function(){
+            $(this).show();
+        });
+    }
 })
