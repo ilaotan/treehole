@@ -3,6 +3,7 @@ package com.zhangyingwei.treehole.admin.controller;
 import com.zhangyingwei.treehole.admin.model.Article;
 import com.zhangyingwei.treehole.admin.model.Kind;
 import com.zhangyingwei.treehole.admin.service.ArticleService;
+import com.zhangyingwei.treehole.admin.service.KindService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.Pages;
 import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
@@ -28,6 +29,8 @@ public class ArticleController {
     private Logger logger = LoggerFactory.getLogger(ArticleController.class);
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private KindService kindService;
 
     /**
      * 路由到 新建文章发布页面
@@ -140,6 +143,8 @@ public class ArticleController {
     public String indexHisroty(Map<String,Object> model) throws TreeHoleException {
         List<Article> articles = this.articleService.getArticles();
         model.put("articles", articles);
+        List<Kind> kinds = this.kindService.getKinds();
+        model.put("kinds", kinds);
         return Pages.ADMIN_ARTICLES_HISTORY;
     }
 
