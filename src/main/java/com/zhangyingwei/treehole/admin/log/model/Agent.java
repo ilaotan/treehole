@@ -59,8 +59,6 @@ public class Agent {
 
     private Map<String, String> bowserMap = new TreeMap<String,String>(){
         {
-            put("chrome", "谷歌浏览器");
-            put("Safari", "Safari浏览器");
             put("MSIE 6.0", "IE6");
             put("MSIE 7.0", "IE7");
             put("MSIE 8.0", "IE8");
@@ -68,14 +66,16 @@ public class Agent {
             put("MSIE 10.0", "IE10");
             put("MSIE 11.0", "IE11");
             put("MSIE 12.0", "IE12");
+            put("tieba", "百度贴吧");
+            put("Weibo", "微博");
+            put("Wechat", "微信");
             put("SogouMobileBrowser", "搜狗手机浏览器");
             put("MQQBrowser", "QQ手机浏览器");
             put("Firefox", "火狐浏览器");
             put("Netscape", "Netscape浏览器");
             put("SeaMonkey", "SeaMonkey浏览器");
-            put("tieba", "百度贴吧");
-            put("Weibo", "微博");
-            put("Wechat", "微信");
+            put("chrome", "谷歌浏览器");
+            put("Safari", "Safari浏览器");
         }
     };
 
