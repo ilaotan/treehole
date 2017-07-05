@@ -112,6 +112,7 @@
         padding: 3px 0;
     }
 </style>
+<script src="/dist/is/is.min.js"></script>
 <div id="comments">
     <div class="edit">
         <div class="item">
@@ -175,36 +176,72 @@
 </div>
 <script>
     $(function () {
+        var valid = function (name,email,site,content) {
+            if(is.empty($.trim(name))){
+                alert("昵称不能为空");
+                return false;
+            }
+            if(!is.email(email)){
+                alert("请输入正确格式的邮箱");
+                return false;
+            }
+            if(!is.empty(site) && !is.startWith(site,"http://")){
+                alert("网站地址格式不正确");
+                return false;
+            }
+            if(is.empty($.trim(content))){
+                alert("内容不能为空");
+                return false;
+            }
+            return true;
+        };
+        var clear = function (obj) {
+            $(obj).parent().parent().find("#name").val("");
+            $(obj).parent().parent().find("#email").val("");
+            $(obj).parent().parent().find("#site").val("");
+            $(obj).parent().parent().find("#textarea").text("");
+        };
         var submitFun = function (){
             var name = $(this).parent().parent().find("#name").val();
             var email = $(this).parent().parent().find("#email").val();
             var site = $(this).parent().parent().find("#site").val();
             var content = $(this).parent().parent().find("#textarea").text();
-            var html = '<div class="item"><img src="/theme/default/styles/images/freud.jpg"/><div class="content"><div class="head"><span class="name">' + name + '</span><span class="tag">游客</span><span class="time">刚刚</span></div><div class="body">' + content + '</div><div class="action"><a onclick="window.backFun()" href="#">回复</a></div></div></div>';
+            if(!valid(name,email,site,content)){
+                return;
+            }
+            if(window.backUser){
+                name = window.backUser + " @" + name;
+                window.backUser = undefined;
+            }
+            var html = '<div class="item"><img src="/theme/default/styles/images/freud.jpg"/><div class="content"><div class="head"><span class="name">' + name + '</span><span class="tag">游客</span><span class="time">刚刚</span></div><div class="body">' + content + '</div><div class="action"><a onclick="backFun()" href="#">回复</a></div></div></div>';
             $(html).hide().prependTo("#show").slideDown(300);
-            window.showComment.slideToggle(300);
+            if(window.showComment){
+                window.showComment.slideToggle(300);
+            }
+            clear(this);
         }
         $(".submit").click(submitFun);
 
         var backFun = function () {
-//            var commdom = window.showComment;
-//            if (!commdom) {
-//                var dom = $(".edit").clone();
-//                dom.hide();
-//                commdom = window.showComment = dom;
-//            }
-//            var this_dom = $(this).parent().parent().parent().find(".edit");
-//            if (this_dom.length == 0) {
-//                commdom.slideUp(0);
-//                $(this).parent().parent().parent().append(commdom);
-//                $(".submit").unbind("click");
-//                $(".submit").click(submitFun);
-//            }
-//            commdom.slideToggle(300);
-            alert("回复个屁啊,功能还没做完");
+            var commdom = window.showComment;
+            if (!commdom) {
+                var dom = $(".edit").clone();
+                dom.hide();
+                commdom = window.showComment = dom;
+            }
+            var this_dom = $(this).parent().parent().parent().find(".edit");
+            var user = $(this).parent().parent().find(".head").find(".name").text();
+            window.backUser = user;
+            if (this_dom.length == 0) {
+                commdom.slideUp(0);
+                $(this).parent().parent().parent().append(commdom);
+                $(".submit").unbind("click");
+                $(".submit").click(submitFun);
+            }
+            commdom.slideToggle(300);
         };
         window.backFun = function () {
-            backFun();
+            return backFun();
         };
 
         /**
