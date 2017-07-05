@@ -210,10 +210,11 @@
                 return;
             }
             if(window.backUser){
-                name = window.backUser + " @" + name;
+                name = name + " @" + window.backUser;
+                console.log(name);
                 window.backUser = undefined;
             }
-            var html = '<div class="item"><img src="/theme/default/styles/images/freud.jpg"/><div class="content"><div class="head"><span class="name">' + name + '</span><span class="tag">游客</span><span class="time">刚刚</span></div><div class="body">' + content + '</div><div class="action"><a onclick="backFun()" href="#">回复</a></div></div></div>';
+            var html = '<div class="item"><img src="/theme/default/styles/images/freud.jpg"/><div class="content"><div class="head"><span class="name">' + name + '</span><span class="tag">游客</span><span class="time">刚刚</span></div><div class="body">' + content + '</div><div class="action"><a onclick="backFun" href="#">回复</a></div></div></div>';
             $(html).hide().prependTo("#show").slideDown(300);
             if(window.showComment){
                 window.showComment.slideToggle(300);
