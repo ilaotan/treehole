@@ -3,6 +3,13 @@ $(function(){
     var switchery = new Switchery($(".js-switch")[0], {
         color: '#26B99A'
     });
+    $(".js-switch").on("click", function () {
+        if (switchery.isChecked()) {
+            $("#usecommont").val("on");
+        } else {
+            $("#usecommont").val("off");
+        }
+    });
 
     /**
      * markdown编辑器
