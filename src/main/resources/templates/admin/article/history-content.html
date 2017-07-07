@@ -12,10 +12,10 @@
         <div class="x_title">
             <div class="history-toobar row form-inline">
                 <div class="input-group col-md-3">
-                    <input type="text" class="form-control" id="title" placeholder="文章标题">
                     <span class="input-group-btn">
                         <button type="button" id="query" class="btn btn-primary">查询</button>
                     </span>
+                    <input type="text" class="form-control" id="title" placeholder="文章标题">
                 </div>
                 <div class="col-md-3 input-group">
                     <div class="btn-group">
@@ -23,20 +23,6 @@
                         <button class="btn btn-default statubtn" value="pub" type="button">已发布</button>
                         <button class="btn btn-default statubtn" value="nopub" type="button">未发布</button>
                         <button class="btn btn-default statubtn" value="del" type="button">已删除</button>
-                    </div>
-                </div>
-                <div class="col-md-1 input-group">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="kind-all btn btn-info">全部分类</button>
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <% for(kind in kinds){ %>
-                                <li value="${kind.id}"><a class="kind-item" href="#">${kind.name}</a></li>
-                            <% } %>
-                        </ul>
                     </div>
                 </div>
                 <div class="x_content">

@@ -92,6 +92,7 @@ $(function () {
                 title: false,
                 closeBtn: 0,
                 shadeClose: true,
+                area: "80%",
                 skin: 'img-show',
                 content: "<img src='"+url+"'>"
             });
